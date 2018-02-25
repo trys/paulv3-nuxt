@@ -1,0 +1,16 @@
+{
+  "name": "paulv3-nuxt",
+  "version": "3.0.0",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt generate"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "mkdirp-promise": "^5.0.1",
+    "nuxt": "^1.3.0"
+  }
+}
