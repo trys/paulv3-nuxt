@@ -3,7 +3,7 @@
     <h1>Fixtures</h1>
     <ul>
       <li v-for="fixture in fixtures" :key="fixture.id">
-        <nuxt-link :to="{ path: `/fixtures/${fixture.id}` }">
+        <nuxt-link :to="{ name: 'fixtures-id', params: { id: fixture.id } }">
           {{ fixture.team_one.name }} vs. {{ fixture.team_two.name }}
         </nuxt-link>
       </li>

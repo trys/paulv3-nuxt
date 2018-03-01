@@ -2,10 +2,11 @@
   <div>
     <header>
       <h1 @click="$router.push('/')">Nuxt static</h1>
-      <nuxt-link to="/">Home</nuxt-link> | 
-      <nuxt-link to="/teams">Teams</nuxt-link> | 
-      <nuxt-link to="/groups">Groups</nuxt-link> | 
-      <nuxt-link to="/fixtures">Fixtures</nuxt-link>
+      <nuxt-link :to="{ name: 'index' }">Home</nuxt-link> | 
+      <nuxt-link :to="{ name: 'teams' }">Teams</nuxt-link> | 
+      <nuxt-link :to="{ name: 'groups' }">Groups</nuxt-link> | 
+      <nuxt-link :to="{ name: 'table' }">Table</nuxt-link> | 
+      <nuxt-link :to="{ name: 'fixtures' }">Fixtures</nuxt-link>
     </header>
     <nuxt></nuxt>
   </div>

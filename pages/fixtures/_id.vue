@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>{{ fixture.team_one.name }} vs. {{ fixture.team_two.name }}</h1>
-    <nuxt-link to="/fixtures">&larr; go back</nuxt-link>
+    <nuxt-link :to="{ name: 'fixtures' }">&larr; go back</nuxt-link>
   </div>
 </template>
 

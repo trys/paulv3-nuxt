@@ -2,7 +2,7 @@
   <div>
     <h1>{{ team.name }}</h1>
     <h2>Group {{ team.group.toUpperCase() }}</h2>
-    <nuxt-link to="/teams">&larr; go back</nuxt-link>
+    <nuxt-link :to="{ name: 'teams' }">&larr; go back</nuxt-link>
   </div>
 </template>
 

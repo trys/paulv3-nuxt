@@ -2,7 +2,7 @@
   <div>
     <h1>Group {{ group }}</h1>
     <teams-list :teams="teams" />
-    <nuxt-link to="/groups">&larr; go back</nuxt-link>
+    <nuxt-link :to="{ name: 'groups' }">&larr; go back</nuxt-link>
   </div>
 </template>
 
