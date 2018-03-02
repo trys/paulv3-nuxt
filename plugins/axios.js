@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 let baseURL = 'https://jsonplaceholder.typicode.com'
-baseURL = 'http://localhost:8080'
+baseURL = 'https://paulv3-mock-api-htslvlulgx.now.sh'
 
 if (process.browser && process.static) {
   baseURL = '/data'
