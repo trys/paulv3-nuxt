@@ -27,9 +27,10 @@
 
       if (user) {
         this.$store.commit('addUser', user)
-
-        const { data } = await axios.get('/predictions')
-        data.forEach(prediction => this.$store.commit('addPrediction', prediction))
+        try {
+          const { data } = await axios.get('/predictions')
+          data.forEach(prediction => this.$store.commit('addPrediction', prediction))
+        } catch(e) {}
       }
     }
   }
