@@ -21,10 +21,11 @@ module.exports = {
   // Generate dynamic routes
   generate: {
     routes: () => {
-      return axios.get('https://jsonplaceholder.typicode.com/users').then((res) => {
-        const users = res.data
-        return users.map(user => `/users/${user.id}`)
-      })
+      return ['/table', '/fixtures', '/teams', '/challenges']
+      // return axios.get('https://jsonplaceholder.typicode.com/users').then((res) => {
+      //   const users = res.data
+      //   return users.map(user => `/users/${user.id}`)
+      // })
     }
   }
 
