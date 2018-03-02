@@ -5,11 +5,11 @@ module.exports = {
 
   // Head and global Meta tags
   head: {
-    titleTemplate: '%s | Nuxt static 🔥',
+    titleTemplate: '%s | Paul the Octopus',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'A static site powered by Nuxt.js' }
+      { hid: 'description', name: 'description', content: '' }
     ]
   },
 
