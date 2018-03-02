@@ -6,7 +6,10 @@
       <nuxt-link :to="{ name: 'teams' }">Teams</nuxt-link> | 
       <nuxt-link :to="{ name: 'groups' }">Groups</nuxt-link> | 
       <nuxt-link :to="{ name: 'table' }">Table</nuxt-link> | 
-      <nuxt-link :to="{ name: 'fixtures' }">Fixtures</nuxt-link>
+      <nuxt-link :to="{ name: 'fixtures' }">Fixtures</nuxt-link> | 
+      <nuxt-link v-if="!$store.state.user" :to="{ name: 'account-login' }">Login</nuxt-link>
+      <nuxt-link v-else :to="{ name: 'account-logout' }">Logout</nuxt-link> |
+      <nuxt-link v-if="!$store.state.user" :to="{ name: 'account-signup' }">Sign up</nuxt-link>
     </header>
     <nuxt></nuxt>
   </div>
@@ -14,10 +17,20 @@
 
 <script>
   import axios from '~/plugins/axios'
+  import GoTrue from 'gotrue-js';
   export default {
     async mounted () {
-      const { data } = await axios.get('/predictions')
-      data.forEach(prediction => this.$store.commit('addPrediction', prediction))
+      const isLocal = document.location.host.split(":").shift() === 'localhost'
+      const auth = new GoTrue({ APIUrl: 'https://paultheoctopus.netlify.com/.netlify/identity', setCookie: !isLocal });
+      this.$store.commit('addAuth', auth)
+      const user = this.$store.state.auth.currentUser()
+
+      if (user) {
+        this.$store.commit('addUser', user)
+
+        const { data } = await axios.get('/predictions')
+        data.forEach(prediction => this.$store.commit('addPrediction', prediction))
+      }
     }
   }
 </script>

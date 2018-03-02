@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.16.2",
+    "gotrue-js": "^0.9.20",
     "mkdirp-promise": "^5.0.1",
     "nuxt": "^1.3.0"
   }
