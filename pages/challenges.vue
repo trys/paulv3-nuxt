@@ -15,9 +15,9 @@ import axios from '~/plugins/axios'
 import teamPicker from '~/components/team-picker'
 
 export default {
-  async asyncData() {
+  async asyncData({ store }) {
     const challengePromise = axios.get('/challenges')
-    const teamPromise = axios.get('/teams')
+    const teamPromise = store.dispatch('getTeams')
     const results = await Promise.all([challengePromise, teamPromise])
     const answers = {}
     results[0].data.forEach(c => answers[c.id] = '')

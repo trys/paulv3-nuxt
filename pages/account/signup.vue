@@ -28,7 +28,6 @@ export default {
       this.error = ''
       this.$store.state.auth.login(event.target.email.value, event.target.password.value, true).then(
         user => {
-          console.log(user)
           this.$store.commit('addUser', user)
           window.location.href = '/'
         },

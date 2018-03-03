@@ -1,11 +1,23 @@
 import Vuex from 'vuex'
+import axios from '~/plugins/axios'
 
 const createStore = () => {
   return new Vuex.Store({
     state: {
       predictions: [],
       user: null,
-      auth: null
+      auth: null,
+      teams: []
+    },
+
+    actions: {
+      async getTeams ({ state, commit }) {
+        if (state.teams.length) return state.teams
+
+        const { data } = await axios.get('/teams')
+        commit('addTeams', data)
+        return data
+      }
     },
 
     mutations: {
@@ -21,6 +33,10 @@ const createStore = () => {
 
       addAuth (state, auth) {
         state.auth = auth
+      },
+
+      addTeams (state, teams) {
+        state.teams = teams
       },
 
       addUser (state, user) {

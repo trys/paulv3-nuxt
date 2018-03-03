@@ -17,10 +17,10 @@ import axios from '~/plugins/axios'
 import teamsList from '~/components/teams-list'
 
 export default {
-  async asyncData() {
-    const { data } = await axios.get('/teams')
+  async asyncData({ store }) {
+    const teams = await store.dispatch('getTeams')
     return {
-      groups: data.reduce((c, t) => {
+      groups: teams.reduce((c, t) => {
         if (!c[t.group]) c[t.group] = []
         c[t.group].push(t)
         return c
