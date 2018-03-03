@@ -24,15 +24,18 @@ export default {
   },
 
   methods: {
-    login (event) {
+    signup (event) {
       this.error = ''
-      this.$store.state.auth.login(event.target.email.value, event.target.password.value, true).then(
-        user => {
-          this.$store.commit('addUser', user)
+      this.$store.state.auth.signup(
+        event.target.email.value,
+        event.target.password.value,
+        { full_name: event.target.name.value }
+      ).then(
+        response => {
           window.location.href = '/'
         },
         error => {
-          this.error = error.json.error_description
+          this.error = error.json.msg
           event.target.password.value = ''
         }
       )

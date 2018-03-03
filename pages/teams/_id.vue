@@ -13,7 +13,7 @@ export default {
   async asyncData({ params, store }, callback) {
     const teams = await store.dispatch('getTeams')
     const team = teams.find(t => t.slug === params.id)
-    if (team === -1) return callback({ statusCode: 404, message: 'Team not found' })
+    if (!team) return callback({ statusCode: 404, message: 'Team not found' })
     else return callback(null, { team })
   },
 

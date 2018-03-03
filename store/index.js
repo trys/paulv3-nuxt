@@ -7,7 +7,8 @@ const createStore = () => {
       predictions: [],
       user: null,
       auth: null,
-      teams: []
+      teams: [],
+      fixtures: []
     },
 
     actions: {
@@ -16,6 +17,14 @@ const createStore = () => {
 
         const { data } = await axios.get('/teams')
         commit('addTeams', data)
+        return data
+      },
+
+      async getFixtures ({ state, commit }) {
+        if (state.fixtures.length) return state.fixtures
+
+        const { data } = await axios.get('/fixtures')
+        commit('addFixtures', data)
         return data
       }
     },
@@ -37,6 +46,10 @@ const createStore = () => {
 
       addTeams (state, teams) {
         state.teams = teams
+      },
+
+      addFixtures (state, fixtures) {
+        state.fixtures = fixtures
       },
 
       addUser (state, user) {

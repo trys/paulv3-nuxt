@@ -9,11 +9,11 @@
 import axios from '~/plugins/axios'
 
 export default {
-  async asyncData({ params }) {
-    const { data } = await axios.get(`/fixtures/${params.id}`)
-    return {
-      fixture: data
-    }
+  async asyncData({ params, store }, callback) {
+    const fixtures = await store.dispatch('getFixtures')
+    const fixture = fixtures.find(f => String(f.id) === String(params.id))
+    if (!fixture) return callback({ statusCode: 404, message: 'Fixture not found' })
+    else return callback(null, { fixture })
   },
 
   head() {

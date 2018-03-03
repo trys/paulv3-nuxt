@@ -15,10 +15,9 @@
 import axios from '~/plugins/axios'
 
 export default {
-  async asyncData() {
-    const { data } = await axios.get('/fixtures')
+  async asyncData({ store }) {
     return {
-      fixtures: data
+      fixtures: await store.dispatch('getFixtures')
     }
   },
 
