@@ -13,9 +13,7 @@
 </template>
 
 <script>
-import axios from '~/plugins/axios'
 import teamsList from '~/components/teams-list'
-
 export default {
   async asyncData({ store }) {
     const teams = await store.dispatch('getTeams')

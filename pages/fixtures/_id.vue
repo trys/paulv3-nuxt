@@ -6,8 +6,6 @@
 </template>
 
 <script>
-import axios from '~/plugins/axios'
-
 export default {
   async asyncData({ params, store }, callback) {
     const fixtures = await store.dispatch('getFixtures')

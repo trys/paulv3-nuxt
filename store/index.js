@@ -5,7 +5,7 @@ const createStore = () => {
   return new Vuex.Store({
     state: {
       predictions: [],
-      user: null,
+      user: false,
       auth: null,
       teams: [],
       fixtures: []

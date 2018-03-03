@@ -1,37 +1,32 @@
 <template>
   <div>
-    <header>
-      <h1 @click="$router.push('/')">Nuxt static</h1>
-      <nuxt-link :to="{ name: 'index' }">Home</nuxt-link> | 
-      <nuxt-link :to="{ name: 'teams' }">Teams</nuxt-link> | 
-      <nuxt-link :to="{ name: 'groups' }">Groups</nuxt-link> | 
-      <nuxt-link :to="{ name: 'table' }">Table</nuxt-link> | 
-      <nuxt-link :to="{ name: 'fixtures' }">Fixtures</nuxt-link> | 
-      <nuxt-link v-if="!$store.state.user" :to="{ name: 'account-login' }">Login</nuxt-link>
-      <nuxt-link v-else :to="{ name: 'account-logout' }">Logout</nuxt-link> |
-      <nuxt-link v-if="!$store.state.user" :to="{ name: 'account-signup' }">Sign up</nuxt-link>
-    </header>
-    <nuxt></nuxt>
+    <site-menu />
+    <nuxt />
   </div>
 </template>
 
 <script>
   import axios from '~/plugins/axios'
   import GoTrue from 'gotrue-js';
+  import SiteMenu from '~/components/menu'
   export default {
     async mounted () {
       const isLocal = document.location.host.split(":").shift() === 'localhost'
       const auth = new GoTrue({ APIUrl: 'https://paultheoctopus.netlify.com/.netlify/identity', setCookie: !isLocal });
       this.$store.commit('addAuth', auth)
       const user = this.$store.state.auth.currentUser()
+      this.$store.commit('addUser', user)
 
       if (user) {
-        this.$store.commit('addUser', user)
         try {
           const { data } = await axios.get('/predictions')
           data.forEach(prediction => this.$store.commit('addPrediction', prediction))
         } catch(e) {}
       }
+    },
+
+    components: {
+      SiteMenu
     }
   }
 </script>

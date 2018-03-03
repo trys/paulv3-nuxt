@@ -1,19 +1,17 @@
 <template>
   <div>
     <h1>Fixtures</h1>
-    <ul>
-      <li v-for="fixture in fixtures" :key="fixture.id">
-        <nuxt-link :to="{ name: 'fixtures-id', params: { id: fixture.id } }">
-          {{ fixture.team_one.name }} vs. {{ fixture.team_two.name }}
-        </nuxt-link>
-      </li>
-    </ul>
+    <fixture-preview
+      v-for="fixture in fixtures"
+      :key="fixture.id"
+      :fixture="fixture"
+      :prediction="predictions.find(p => p.fixture.id === fixture.id)"
+    />
   </div>
 </template>
 
 <script>
-import axios from '~/plugins/axios'
-
+import fixturePreview from '~/components/fixture'
 export default {
   async asyncData({ store }) {
     return {
@@ -23,6 +21,16 @@ export default {
 
   head: {
     title: 'Fixtures'
+  },
+
+  components: {
+    fixturePreview
+  },
+
+  computed: {
+    predictions () {
+      return this.$store.state.predictions
+    }
   }
 }
 </script>

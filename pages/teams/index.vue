@@ -6,9 +6,7 @@
 </template>
 
 <script>
-
 import teamsList from '~/components/teams-list'
-
 export default {
   async asyncData({ store }) {
     return {

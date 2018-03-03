@@ -26,11 +26,7 @@ export default {
     login (event) {
       this.error = ''
       this.$store.state.auth.login(event.target.email.value, event.target.password.value, true).then(
-        user => {
-          console.log(user)
-          this.$store.commit('addUser', user)
-          window.location.href = '/'
-        },
+        user => window.location.href = '/',
         error => {
           this.error = error.json.error_description
           event.target.password.value = ''
