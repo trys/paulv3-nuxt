@@ -1,24 +1,24 @@
 <template>
-  <ul>
-    <li>
-      <h3>
+  <li>
+    <ul>
+      <li>
         <nuxt-link :to="{ name: 'fixtures-id', params: { id: fixture.id } }">
           {{ fixture.team_one.name }} vs. {{ fixture.team_two.name }}
         </nuxt-link>
-      </h3>
-    </li>
-    <li>
-      {{ gametime }}
-    </li>
-    <li>
-      <strong v-if="fixture.score_one === null">&nbsp;</strong>
-      <strong v-else>{{ fixture.score_one }} - {{ fixture.score_two }}</strong>
-    </li>
-    <li>
-      <strong v-if="!prediction">&nbsp;</strong>
-      <strong v-else>{{ prediction.score_one }} - {{ prediction.score_two }}</strong>
-    </li>
-  </ul>
+      </li>
+      <li>
+        {{ gametime }}
+      </li>
+      <li>
+        Score: <strong v-if="fixture.score_one === null">&nbsp;</strong>
+        <strong v-else>{{ fixture.score_one }} - {{ fixture.score_two }}</strong>
+      </li>
+      <li>
+        Prediction: <strong v-if="!prediction">&nbsp;</strong>
+        <strong v-else>{{ prediction.score_one }} - {{ prediction.score_two }}</strong>
+      </li>
+    </ul>
+  </li>
 </template>
 
 <script>
