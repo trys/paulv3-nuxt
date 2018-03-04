@@ -14,6 +14,21 @@
       const isLocal = document.location.host.split(":").shift() === 'localhost'
       const auth = new GoTrue({ APIUrl: 'https://paultheoctopus.netlify.com/.netlify/identity', setCookie: !isLocal });
       this.$store.commit('addAuth', auth)
+
+      if (this.$route.hash.indexOf('#access_token') === 0) {
+        const hash = this.$route.hash.replace('#', '')
+        const options = {}
+        hash.split('&').forEach((p) => {
+          const [k, v] = p.split('=')
+          options[k] = v
+        })
+        document.location.hash = ''
+
+        await this.$store.state.auth.createUser(options, true)
+        .then((user) => this.$store.commit('addUser', user))
+        .catch(error => console.error(error))
+      }
+
       const user = this.$store.state.auth.currentUser()
       this.$store.commit('addUser', user)
 
