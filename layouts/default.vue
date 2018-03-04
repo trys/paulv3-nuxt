@@ -27,7 +27,7 @@
 
         await this.$store.state.auth.createUser(options, true)
         .then((user) => {
-          Cookies.set('nf_jwt', user.token.access_token, { expires: 1 });
+          Cookies.set('nf_jwt', user.token.access_token, { expires: 1, secure: true });
           this.$store.commit('addUser', user)
         })
         .catch(error => console.error(error))
