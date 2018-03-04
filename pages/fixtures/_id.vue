@@ -1,6 +1,8 @@
 <template>
   <div>
-    <h1>{{ fixture.team_one.name }} vs. {{ fixture.team_two.name }}</h1>
+    <h1>
+      <nuxt-link :to="{ name: 'teams-id', params: { id: fixture.team_one.slug } }">{{ fixture.team_one.name }}</nuxt-link>
+       vs. <nuxt-link :to="{ name: 'teams-id', params: { id: fixture.team_two.slug } }">{{ fixture.team_two.name }}</nuxt-link></h1>
     <h2>Kickoff: {{ gametime }}</h2>
     <nuxt-link :to="{ name: 'fixtures' }">&larr; go back</nuxt-link>
   </div>
