@@ -17,9 +17,7 @@ export default {
 
   methods: {
     loginWithGoogle () {
-      const url = this.$store.state.auth.loginExternalUrl(this.provider)
-      const url2 = this.$store.state.auth.acceptInviteExternalUrl(this.provider, 123)
-      window.location.href = url
+      window.location.href = this.$store.state.auth.loginExternalUrl(this.provider)
     }
   }
 }

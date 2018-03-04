@@ -9,6 +9,7 @@
   import axios from '~/plugins/axios'
   import GoTrue from 'gotrue-js';
   import SiteMenu from '~/components/menu'
+  import Cookies from 'js-cookie'
   export default {
     async mounted () {
       const isLocal = document.location.host.split(":").shift() === 'localhost'
@@ -25,7 +26,10 @@
         document.location.hash = ''
 
         await this.$store.state.auth.createUser(options, true)
-        .then((user) => this.$store.commit('addUser', user))
+        .then((user) => {
+          Cookies.set('nf_jwt', user.token.access_token, { expires: 1 });
+          this.$store.commit('addUser', user)
+        })
         .catch(error => console.error(error))
       }
 
