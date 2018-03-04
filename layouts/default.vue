@@ -12,7 +12,7 @@
   import Cookies from 'js-cookie'
   export default {
     async mounted () {
-      const isLocal = document.location.host.split(":").shift() === 'localhost'
+      const isLocal = document.location.host.split(':').shift() === 'localhost'
       const auth = new GoTrue({ APIUrl: 'https://paultheoctopus.netlify.com/.netlify/identity', setCookie: !isLocal });
       this.$store.commit('addAuth', auth)
 
@@ -28,7 +28,7 @@
         await this.$store.state.auth.createUser(options, true)
         .then((user) => {
           Cookies.set('nf_jwt', user.token.access_token, { expires: 1, secure: true });
-          this.$store.commit('addUser', user)
+          window.location.href = '/'
         })
         .catch(error => console.error(error))
       }
