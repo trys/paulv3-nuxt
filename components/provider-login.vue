@@ -1,5 +1,5 @@
 <template>
-  <button type="button" @click="loginWithGoogle">{{ label }}</button>
+  <button type="button" @click="login">{{ label }}</button>
 </template>
 
 <script>
@@ -12,11 +12,14 @@ export default {
     label: {
       type: String,
       default: () => 'Login with Google'
+    },
+    appId: {
+      type: String
     }
   },
 
   methods: {
-    loginWithGoogle () {
+    login () {
       window.location.href = this.$store.state.auth.loginExternalUrl(this.provider)
     }
   }
