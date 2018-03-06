@@ -23,6 +23,7 @@ if (process.server && process.static) {
   instance.interceptors.response.use(
     async function (response) {
       // Do something with response data
+      console.log(response.request.path)
       const end = response.request.path.includes('.netlify/functions') ? '' : '.json'
       const path = join(process.env.dataDir, response.request.path + end)
       console.log('Save', path)
