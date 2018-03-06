@@ -10,7 +10,7 @@ const instance = axios.create({ baseURL })
 
 if (process.browser && process.static) {
   instance.interceptors.request.use((config) => {
-    config.url = config.url + '.json'
+    config.url = config.url + (config.url.includes('.netlify/functions') ? '' : '.json')
     return config
   })
 }
@@ -23,9 +23,7 @@ if (process.server && process.static) {
   instance.interceptors.response.use(
     async function (response) {
       // Do something with response data
-      console.log(response.request.path)
-      const end = response.request.path.includes('.netlify/functions') ? '' : '.json'
-      const path = join(process.env.dataDir, response.request.path + end)
+      const path = join(process.env.dataDir, response.request.path + '.json')
       console.log('Save', path)
       await mkdirp(dirname(path))
       writeFileSync(path, JSON.stringify(response.data))
