@@ -10,10 +10,11 @@
   import GoTrue from 'gotrue-js';
   import SiteMenu from '~/components/menu'
   import Cookies from 'js-cookie'
+  const url = 'https://paultheoctopus.netlify.com'
   export default {
     async mounted () {
       const isLocal = document.location.host.split(':').shift() === 'localhost'
-      const auth = new GoTrue({ APIUrl: 'https://paultheoctopus.netlify.com/.netlify/identity', setCookie: !isLocal });
+      const auth = new GoTrue({ APIUrl: url + '/.netlify/identity', setCookie: !isLocal });
       this.$store.commit('addAuth', auth)
 
       if (this.$route.hash.indexOf('#access_token') === 0) {
@@ -38,7 +39,7 @@
 
       if (user) {
         try {
-          const { data } = await axios.get('/predictions')
+          const { data } = await axios.get(url + '/.netlify/functions/predictions')
           data.forEach(prediction => this.$store.commit('addPrediction', prediction))
         } catch(e) {}
       }
