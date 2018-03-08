@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let baseURL = 'https://paulv3-mock-api-htslvlulgx.now.sh'
+let baseURL = 'https://paulv3-mock-api-cxgzemjeca.now.sh'
 
 if (process.browser && process.static) {
   baseURL = '/data'
