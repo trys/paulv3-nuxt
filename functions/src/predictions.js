@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 const res = (cb, statusCode = 400, body = 'Error') => cb(null, { statusCode, body: JSON.stringify(body) })
 
 exports.handler = function(event, context, cb) {
