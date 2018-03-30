@@ -36,6 +36,10 @@
 
       const user = this.$store.state.auth.currentUser()
       this.$store.commit('addUser', user)
+      user.jwt().then(
+        token => console.log("Current token: %s", token),
+        error => console.log("Failed to get token: %o", error)
+      );
 
       if (user) {
         try {
