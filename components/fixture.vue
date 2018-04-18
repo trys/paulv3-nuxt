@@ -1,5 +1,5 @@
 <template>
-  <li>
+  <div class="fixture">
     <ul>
       <li>
         <nuxt-link :to="{ name: 'fixtures-id', params: { id: fixture.id } }">
@@ -18,7 +18,7 @@
         <strong v-else>{{ prediction.score_one }} - {{ prediction.score_two }}</strong>
       </li>
     </ul>
-  </li>
+  </div>
 </template>
 
 <script>
@@ -41,3 +41,9 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.fixture {
+  margin: 10px 0;
+}
+</style>

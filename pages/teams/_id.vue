@@ -2,14 +2,14 @@
   <div>
     <h1>{{ team.name }}</h1>
     <h2>Group {{ team.group.toUpperCase() }}</h2>
-    <ol>
+    <div class="fixtures">
       <fixture-preview
         v-for="fixture in fixtures"
         :key="fixture.id"
         :fixture="fixture"
-        :prediction="predictions.find(p => p.fixture.id === fixture.id)"
+        :prediction="predictions.find(p => p.fixture_id === fixture.id)"
       ></fixture-preview>
-    </ol>
+    </div>
     <nuxt-link :to="{ name: 'teams' }">&larr; go back</nuxt-link>
   </div>
 </template>

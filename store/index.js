@@ -8,7 +8,8 @@ const createStore = () => {
       user: false,
       auth: null,
       teams: [],
-      fixtures: []
+      fixtures: [],
+      menu: false
     },
 
     actions: {
@@ -20,12 +21,26 @@ const createStore = () => {
         return data
       },
 
-      async getFixtures ({ state, commit }) {
-        if (state.fixtures.length) return state.fixtures
+      async getFixtures ({ state, commit }, force = false) {
+        if (state.fixtures.length && !force) return state.fixtures
 
         const { data } = await axios.get('/fixtures')
         commit('addFixtures', data)
         return data
+      },
+
+      async api ({ state }, { url, method, data }) {
+        if (!state.user) throw new Error('Please log in');
+        await state.user.jwt();
+
+        return await axios({
+          url,
+          method,
+          data,
+          headers: {
+            authorization: 'Bearer ' + state.user.token.access_token
+          }
+        })
       }
     },
 
@@ -58,6 +73,14 @@ const createStore = () => {
 
       removeUser (state) {
         state.user = null
+      },
+
+      toggleMenu (state) {
+        state.menu = !state.menu
+      },
+
+      closeMenu (state) {
+        state.menu = false
       }
     }
   })

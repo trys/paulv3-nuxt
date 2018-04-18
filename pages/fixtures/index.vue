@@ -1,14 +1,14 @@
 <template>
   <div>
     <h1>Fixtures</h1>
-    <ol>
+    <div class="fixtures">
       <fixture-preview
         v-for="fixture in fixtures"
         :key="fixture.id"
         :fixture="fixture"
-        :prediction="predictions.find(p => p.fixture.id === fixture.id)"
+        :prediction="predictions.find(p => p.fixture_id === fixture.id)"
       ></fixture-preview>
-    </ol>
+    </div>
   </div>
 </template>
 

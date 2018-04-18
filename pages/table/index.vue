@@ -13,7 +13,7 @@ export default {
   async asyncData() {
     const { data } = await axios.get('/table')
     return {
-      results: data.rankings
+      results: data.data || []
     }
   },
 

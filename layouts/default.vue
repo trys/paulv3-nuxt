@@ -31,22 +31,25 @@
           Cookies.set('nf_jwt', user.token.access_token, { expires: 1, secure: true });
           window.location.href = '/'
         })
-        .catch(error => console.error(error))
+        .catch(console.error)
       }
 
       const user = this.$store.state.auth.currentUser()
       this.$store.commit('addUser', user)
-      user.jwt().then(
-        token => console.log("Current token: %s", token),
-        error => console.log("Failed to get token: %o", error)
-      );
-
       if (user) {
-        try {
-          const { data } = await axios.get(url + '/.netlify/functions/predictions')
-          data.forEach(prediction => this.$store.commit('addPrediction', prediction))
-        } catch(e) {}
+        user.jwt().then(async (token) => {
+          console.log(token)
+          try {
+            const { data } = await axios.get('predictions', {
+              headers: {
+                authorization: 'Bearer ' + token
+              }
+            })
+            data.predictions.forEach(prediction => this.$store.commit('addPrediction', prediction))
+          } catch(e) {}
+        }).catch(console.error);
       }
+
     },
 
     components: {
@@ -56,16 +59,63 @@
 </script>
 
 <style>
-* {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
 }
 
+body {
+  background: #F56969;
+  margin: 0;
+  color: #FFF;
+  font: 16px /1.4 'Avenir';
+}
+
 h1 {
+  font-size: 1.5em;
+  margin: 0 0 30px;
+}
+
+h2 {
+  font-size: 1.125em;
+  margin: 0 0 20px;
+}
+
+h3, h4, h5 {
+  margin: 0 0 20px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.button {
+  background: #FFF;
+  border: 2px solid #F56969;
+  color: #F56969;
+  font-size: 12px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  padding: 0.9em 1.1em 0.8em 1.6em;
+  border-radius: 2em;
+  font-weight: 700;
+  transition: 300ms color, 300ms background;
+  text-align: center;
   cursor: pointer;
 }
 
-body {
-  padding: 30px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+.button:hover {
+  background: #F56969;
+  color: #FFF;
 }
+
+ol,
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 </style>

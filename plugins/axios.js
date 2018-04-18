@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-let baseURL = 'https://paulv3-mock-api-cxgzemjeca.now.sh'
+let baseURL = 'http://localhost:20020'
+baseURL = 'https://api.paultheoctop.us';
 
 if (process.browser && process.static) {
   baseURL = '/data'
@@ -10,7 +11,7 @@ const instance = axios.create({ baseURL })
 
 if (process.browser && process.static) {
   instance.interceptors.request.use((config) => {
-    config.url = config.url + (config.url.includes('.netlify/functions') ? '' : '.json')
+    config.url += '.json'
     return config
   })
 }
