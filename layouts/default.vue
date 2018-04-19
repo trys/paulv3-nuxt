@@ -58,7 +58,7 @@
   }
 </script>
 
-<style>
+<style lang="scss">
 *,
 *:before,
 *:after {
@@ -117,5 +117,7 @@ ul {
   padding: 0;
   margin: 0;
 }
+
+@import './assets/scss/forms';
 
 </style>

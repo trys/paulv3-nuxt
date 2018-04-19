@@ -25,3 +25,16 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+[type="button"] {
+  background: #F2F2F2;
+  padding: 0.6em 1.5em;
+  border: 1px solid #E2E2E2;
+  font: inherit;
+  color: #777;
+  cursor: pointer;
+  margin: 0 0 1rem;
+  font-size: 14px;
+}
+</style>

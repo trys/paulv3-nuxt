@@ -1,21 +1,24 @@
 <template>
-  <div>
-    <br>
-    <provider-login provider="google" />
-    <br>
-    - or -
-    <form method="POST" action="/account/login/" @submit.prevent="login">
+  <center-page>
+    <header>
+      <provider-login provider="google" />
+      <br>
+      - or -
+      <br>
       <h1>Login</h1>
+    </header>
+    <form method="POST" action="/account/login/" @submit.prevent="login">
       <h3 v-if="error">{{ error }}</h3>
       <label>Email: <br><input type="email" name="email" required></label><br>
       <label>Password: <br><input type="password" name="password" required></label><br>
-      <button type="submit">Login</button>
+      <button class="button" type="submit">Login</button>
     </form>
-  </div>
+  </center-page>
 </template>
 
 <script>
-import providerLogin from '~/components/provider-login'
+import centerPage from '@/components/center-page'
+import providerLogin from '@/components/provider-login'
 export default {
   data () {
     return {
@@ -30,7 +33,8 @@ export default {
   },
 
   components: {
-    providerLogin
+    providerLogin,
+    centerPage
   },
 
   methods: {
