@@ -13,10 +13,24 @@ module.exports = {
     ]
   },
 
+  loading: {
+    color: 'rgba(0, 0, 0, 0.2)'
+  },
+
+  css: [
+    {
+      src: 'assets/scss/global.scss', lang: 'scss'
+    }
+  ],
+
   // Nuxt environment variables
   env: {
     dataDir: join(__dirname, 'dist/data')
   },
+
+  plugins: [
+    { src: '~/plugins/auth', ssr: false }
+  ],
   
   // Generate dynamic routes
   generate: {

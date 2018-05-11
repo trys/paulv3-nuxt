@@ -1,0 +1,98 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #F56969;
+  margin: 0;
+  color: #FFF;
+  font: 16px /1.4 'Avenir';
+}
+
+.layout {
+  transition: 500ms 250ms background-color;
+  background-color: #F56969;
+  min-height: 100vh;
+}
+
+.layout--fixtures {
+  background-color: #9EC9D9;
+}
+
+h1 {
+  font-size: 1.5em;
+  margin: 0 0 30px;
+}
+
+h2 {
+  font-size: 1.125em;
+  margin: 0 0 20px;
+}
+
+h3, h4, h5 {
+  margin: 0 0 20px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.button {
+  background: #FFF;
+  border: 2px solid #F56969;
+  color: #F56969;
+  font-size: 12px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  padding: 0.9em 1.1em 0.8em 1.6em;
+  border-radius: 2em;
+  font-weight: 700;
+  transition: 300ms color, 300ms background;
+  text-align: center;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #F56969;
+  color: #FFF;
+}
+
+ol,
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@import './assets/scss/forms';
+
+
+.page {
+  padding-top: 50px;
+
+  &-header {
+    text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.2);
+    text-align: center;
+
+    h1 + h2 {
+      margin-top: -20px;
+      margin-bottom: 40px;
+    }
+  }
+
+  &-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding-bottom: 30px;
+  }
+}
+
+.fixture-date {
+  background: #FFF;
+  margin: 0 0 50px;
+  color: #43555C;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}

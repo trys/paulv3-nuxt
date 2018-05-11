@@ -1,49 +1,121 @@
 <template>
-  <div class="fixture">
-    <ul>
-      <li>
-        <nuxt-link :to="{ name: 'fixtures-id', params: { id: fixture.id } }">
-          {{ fixture.team_one.name }} vs. {{ fixture.team_two.name }}
-        </nuxt-link>
-      </li>
-      <li>
-        {{ gametime }}
-      </li>
-      <li>
-        Score: <strong v-if="fixture.score_one === null">&nbsp;</strong>
-        <strong v-else>{{ fixture.score_one }} - {{ fixture.score_two }}</strong>
-      </li>
-      <li>
-        Prediction: <strong v-if="!prediction">&nbsp;</strong>
-        <strong v-else>{{ prediction.score_one }} - {{ prediction.score_two }}</strong>
-      </li>
-    </ul>
-  </div>
+  <article class="fixture">
+    <time>
+      <strong>{{ day }}</strong>
+      <small>{{ month }}</small>
+    </time>
+    
+    <h3> 
+      <nuxt-link :to="{ name: 'fixtures-id', params: { id: fixture.id } }">
+        {{ fixture.team_one.name }} vs. {{ fixture.team_two.name }}
+      </nuxt-link>
+    </h3>
+
+    <small>{{ time }}
+      <template v-if="fixture.score_one !== null">
+        <b>| </b> Score: <strong>{{ fixture.score_one }} - {{ fixture.score_two }}</strong>
+      </template>
+
+      <template v-if="prediction">
+        <b>| </b> Prediction: <strong>{{ prediction.score_one }} - {{ prediction.score_two }}</strong>
+      </template>
+
+      <template v-if="fixture.score_one === null">
+        <b>| </b> <span class="edit">{{ prediction ? 'Edit' : 'Add prediction' }}</span>
+      </template>
+    </small>
+
+  </article>
 </template>
 
 <script>
-import { formatDateTime } from '~/plugins/time'
 export default {
   props: {
     fixture: {
       type: Object,
       required: true
     },
+
     prediction: {
       type: Object
     }
   },
 
   computed: {
-    gametime () {
-      return formatDateTime(this.fixture.date)
+    date () {
+      return new Date(this.fixture.date)
+    },
+
+    day () {
+      return this.date.getDate()
+    },
+
+    month () {
+      const months = { 5: 'Jun', 6: 'Jul' }
+      return months[this.date.getMonth()]
+    },
+
+    time () {
+      return this.date.getHours() + ':' + ('0' + this.date.getMinutes()).slice(-2)
     }
   }
-}
+};
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .fixture {
-  margin: 10px 0;
+  position: relative;
+  padding: 20px;
+  background: #FFF;
+  color: #43555C;
+
+  &:first-child time {
+    display: flex;
+  }
+
+  & + .fixture {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+time {
+  position: absolute;
+  right: 20px;
+  top: -20px;
+  width: 40px;
+  height: 40px;
+  background: #68848F;
+  color: #FFF;
+  text-align: center;
+  line-height: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  strong {
+    font-size: 16px;
+    display: block;
+  }
+
+  small {
+    text-transform: uppercase;
+    font-size: 12px;
+    display: block;
+  }
+}
+
+h3 {
+  margin: 0;
+}
+
+.edit {
+  color: #D95B57;
+  cursor: pointer;
+}
+
+b {
+  font-weight: 400;
+  opacity: 0.3;
+  margin: 0 2px;
 }
 </style>

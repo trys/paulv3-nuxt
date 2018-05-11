@@ -1,16 +1,25 @@
 <template>
-  <div>
-    <h1>{{ team.name }}</h1>
-    <h2>Group {{ team.group.toUpperCase() }}</h2>
-    <div class="fixtures">
-      <fixture-preview
+  
+  <div class="page">
+    <header class="page-header">
+      <h1>{{ team.name }}</h1>
+      <h2>
+        <nuxt-link :to="{ name: 'groups-id', params: { id: team.group } }">
+          Group {{ team.group.toUpperCase() }}
+        </nuxt-link>
+      </h2>
+    </header>
+    <div class="page-wrapper">
+      <div
         v-for="fixture in fixtures"
         :key="fixture.id"
-        :fixture="fixture"
-        :prediction="predictions.find(p => p.fixture_id === fixture.id)"
-      ></fixture-preview>
+        class="fixture-date">
+          <fixture-preview
+            :fixture="fixture"
+            :prediction="predictions.find(p => p.fixture_id === fixture.id)"
+          />
+      </div>
     </div>
-    <nuxt-link :to="{ name: 'teams' }">&larr; go back</nuxt-link>
   </div>
 </template>
 
