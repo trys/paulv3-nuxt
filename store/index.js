@@ -9,7 +9,8 @@ const createStore = () => {
       auth: null,
       teams: [],
       fixtures: [],
-      menu: false
+      menu: false,
+      editing: false
     },
 
     actions: {
@@ -81,6 +82,10 @@ const createStore = () => {
 
       closeMenu (state) {
         state.menu = false
+      },
+
+      updateEditing (state, data) {
+        state.editing = data
       }
     }
   })

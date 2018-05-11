@@ -12,12 +12,13 @@ body {
 }
 
 .layout {
-  transition: 500ms 250ms background-color;
+  transition: 500ms 150ms background-color;
   background-color: #F56969;
   min-height: 100vh;
 }
 
-.layout--fixtures {
+.layout--fixtures,
+.layout--fixtures-id {
   background-color: #9EC9D9;
 }
 

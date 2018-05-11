@@ -20,9 +20,9 @@
         <b>| </b> Prediction: <strong>{{ prediction.score_one }} - {{ prediction.score_two }}</strong>
       </template>
 
-      <template v-if="fixture.score_one === null">
-        <b>| </b> <span class="edit">{{ prediction ? 'Edit' : 'Add prediction' }}</span>
-      </template>
+      <no-ssr v-if="fixture.score_one === null && $store.state.user">
+        <span><b>| </b> <span class="edit" @click="edit">{{ prediction ? 'Edit' : 'Add prediction' }}</span></span>
+      </no-ssr>
     </small>
 
   </article>
@@ -58,6 +58,12 @@ export default {
     time () {
       return this.date.getHours() + ':' + ('0' + this.date.getMinutes()).slice(-2)
     }
+  },
+
+  methods: {
+    edit () {
+      this.$store.commit('updateEditing', this.fixture)
+    }
   }
 };
 </script>
@@ -70,7 +76,7 @@ export default {
   color: #43555C;
 
   &:first-child time {
-    display: flex;
+    opacity: 1;
   }
 
   & + .fixture {
@@ -91,6 +97,8 @@ time {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: 400ms opacity;
+  opacity: 0;
 
   strong {
     font-size: 16px;

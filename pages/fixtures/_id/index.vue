@@ -1,12 +1,15 @@
 <template>
-  <div>
-    <h1>
-      <nuxt-link :to="{ name: 'teams-id', params: { id: fixture.team_one.slug } }">{{ fixture.team_one.name }}</nuxt-link>
-       vs. <nuxt-link :to="{ name: 'teams-id', params: { id: fixture.team_two.slug } }">{{ fixture.team_two.name }}</nuxt-link></h1>
-    <h2>Kickoff: {{ gametime }}</h2>
-    <nuxt-link :to="{ name: 'fixtures' }">&larr; go back</nuxt-link>
-    <br>
-    <nuxt-link :to="{ name: 'fixtures-id-edit', params: { id: fixture.id } }">edit &rarr;</nuxt-link>
+  <div class="page">
+    <header class="page-header">
+      <h1>
+        <nuxt-link :to="{ name: 'teams-id', params: { id: fixture.team_one.slug } }">{{ fixture.team_one.name }}</nuxt-link>
+        vs. <nuxt-link :to="{ name: 'teams-id', params: { id: fixture.team_two.slug } }">{{ fixture.team_two.name }}</nuxt-link>
+      </h1>
+      <h2>Kickoff: {{ gametime }}</h2>
+    </header>
+    <div class="page-wrapper">
+    
+    </div>
   </div>
 </template>
 
