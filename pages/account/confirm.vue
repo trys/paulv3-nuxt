@@ -1,11 +1,14 @@
 <template>
-  <div>
-    <h1>Confirming your account...</h1>
-    <h3 v-if="error">{{ error }}</h3>
-  </div>
+  <center-page>
+    <header>
+      <h1>Confirming your account...</h1>
+      <h3 v-if="error">{{ error }}</h3>
+    </header>
+  </center-page>
 </template>
 
 <script>
+import centerPage from '@/components/center-page'
 export default {
   data () {
     return {
@@ -18,6 +21,10 @@ export default {
     return {
       title: 'Confirming your account'
     }
+  },
+
+  components: {
+    centerPage
   },
 
   mounted () {

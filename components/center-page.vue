@@ -11,7 +11,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding: 60px 20px 30px;
+  padding: 80px 20px 50px;
   display: flex;
   width: 100%;
 }
@@ -48,5 +48,6 @@
 
 .center-page__container > header h1 {
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 </style>

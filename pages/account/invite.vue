@@ -1,13 +1,18 @@
 <template>
-  <form method="POST" action="/account/confirm/" @submit.prevent="confirm">
-    <h1>Finish setting up your account</h1>
-    <h3 v-if="error">{{ error }}</h3>
-    <label>Password: <br><input type="password" name="password" required></label><br>
-    <button type="submit">Set up account</button>
-  </form>
+  <center-page>
+    <header>
+      <h1>Finish setting up your account</h1>
+    </header>
+    <form method="POST" action="/account/confirm/" @submit.prevent="confirm">
+      <h3 v-if="error">{{ error }}</h3>
+      <label>Password: <br><input type="password" name="password" required></label><br>
+      <button class="button" type="submit">Set up account</button>
+    </form>
+  </center-page>
 </template>
 
 <script>
+import centerPage from '@/components/center-page'
 export default {
   data () {
     return {
@@ -18,8 +23,12 @@ export default {
 
   head() {
     return {
-      title: 'Confirming'
+      title: 'Finish setting up your account'
     }
+  },
+
+  components: {
+    centerPage
   },
 
   methods: {

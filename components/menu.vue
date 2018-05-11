@@ -42,6 +42,7 @@ export default {
     border: none;
     transition: 300ms background-position;
     outline: none;
+    cursor: pointer;
   }
 
   .navicon.active {
@@ -67,7 +68,7 @@ export default {
     left: 0;
     top: 0;
 
-    transition: 500ms opacity, 500ms visibility, 500ms transform;
+    transition: 400ms opacity, 400ms visibility, 400ms transform;
     transition-timing-function: cubic-bezier(0.72, 0.02, 0.29, 1);
     visibility: hidden;
     transform: translateX(-100%);
@@ -85,7 +86,7 @@ export default {
     position: relative;
   }
 
-  .nuxt-link-exact-active:after {
+  nav a:after {
     content: '';
     position: absolute;
     width: calc(100% - 0.4em);
@@ -93,5 +94,13 @@ export default {
     background: #FFF;
     bottom: 0;
     left: 0;
+
+    transform: scaleX(0);
+    transition: 150ms transform linear;
+  }
+
+  nav a:hover:after,
+  .nuxt-link-exact-active:after {
+    transform: scaleX(1);
   }
 </style>
