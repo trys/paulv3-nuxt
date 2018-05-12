@@ -1,5 +1,9 @@
 @import './settings';
 
+form > div {
+	margin-bottom: 10px;
+}
+
 fieldset {
 	padding: 0;
 	margin: 0 0 1.5rem;
@@ -105,4 +109,10 @@ input[type="checkbox"] {
 	margin-left: auto;
 	margin-right: auto;
 	display: block;
+}
+
+.form-style {
+	background: #FFF;
+	padding: 20px;
+	color: #43555C;
 }

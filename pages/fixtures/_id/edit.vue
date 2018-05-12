@@ -1,8 +1,11 @@
 <template>
-  <div>
-    <fixture-form @submit="update" :teams="teams" :fixture="fixture" />
-
-    <nuxt-link :to="{ name: 'fixtures-id', params: { id: fixture.id } }">&larr; go back</nuxt-link>
+  <div class="page">
+    <header class="page-header">
+      <h1>Edit fixture</h1>
+    </header>
+    <div class="page-wrapper page-wrapper--padded">
+      <fixture-form @submit="update" :teams="teams" :fixture="fixture" />
+    </div>
   </div>
 </template>
 
