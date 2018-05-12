@@ -10,7 +10,8 @@ const createStore = () => {
       teams: [],
       fixtures: [],
       menu: false,
-      editing: false
+      editing: false,
+      predictions_populated: false
     },
 
     actions: {
@@ -121,6 +122,11 @@ const createStore = () => {
 
       closeMenu (state) {
         state.menu = false
+      },
+
+      togglePopulate(state) {
+        if (!state.predictions.length) return
+        state.predictions_populated = !state.predictions_populated
       },
 
       updateEditing (state, data) {

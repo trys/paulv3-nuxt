@@ -4,6 +4,7 @@
       <h1>Groups</h1>
     </header>
     <div class="page-wrapper page-wrapper--padded">
+      <p-populate class="populate--push" />
       <div v-for="group in groups" :key="group[0].group">
         <h2>
           <nuxt-link :to="{ name: 'groups-id', params: { id: group[0].group } }">
@@ -18,6 +19,7 @@
 
 <script>
 import teamsList from '~/components/teams-list'
+import pPopulate from '~/components/populate'
 export default {
   async asyncData({ store }) {
     const [teams, fixtures] = await Promise.all([
@@ -40,7 +42,8 @@ export default {
   },
 
   components: {
-    teamsList
+    teamsList,
+    pPopulate
   }
 }
 </script>

@@ -48,36 +48,64 @@ export default {
   },
 
   computed: {
+    populated () {
+      return this.$store.state.predictions_populated
+    },
+
+    predictions () {
+      return this.$store.state.predictions
+    },
+
     orderedTeams () {
       const teams = this.teams.map(team => {
-        const fixtures = this.fixtures.filter(f => f.score_one !== null && (f.team_one_id === team.id || f.team_two_id === team.id))
+        const fixtures = this.fixtures.filter(f => {
+          const has_team = f.team_one_id === team.id || f.team_two_id === team.id
+          if (!has_team) return false;
+
+          return f.score_one !== null || (this.populated && !!this.predictions.find(p => p.fixture_id === f.id))
+        })
+
         fixtures.sort((a, b) => new Date(a.date) - new Date(b.date));
         
         team.results = fixtures.reduce((r, f) => {
           const current = f.team_one_id === team.id ? 'score_one' : 'score_two'
-          const opposition = team === 'score_one' ? 'score_two' : 'score_one'
+          const opposition = current === 'score_one' ? 'score_two' : 'score_one'
+          let score_for = f[current]
+          let score_against = f[opposition]
+          
+          
+          if (this.populated) {
+            const prediction = this.predictions.find(p => p.fixture_id === f.id)
+            if (prediction) {
+              score_for = prediction[current]
+              score_against = prediction[opposition]
+            }
+          }
+
           r.played++
-          r.for += f[current]
-          r.against += f[opposition]
-          if (f[current] === f[opposition]) {
+          r.agins += score_for
+          r.against += score_against
+          r.diff += score_for
+          r.diff -= score_against
+          if (score_for === score_against) {
             r.drawn++
             r.points++
             if (r.form.length < 5) r.form.push('D')
           }
 
-          if (f[current] > f[opposition]) {
+          if (score_for > score_against) {
             r.won++
             r.points += 3
             if (r.form.length < 5) r.form.push('W')
           }
 
-          if (f[current] < f[opposition]) {
+          if (score_for < score_against) {
             r.lost++
             if (r.form.length < 5) r.form.push('L')
           }
 
           return r;
-        }, { played: 0, won: 0, lost: 0, drawn: 0, for: 0, against: 0, form: [], points: 0 })
+        }, { played: 0, won: 0, lost: 0, drawn: 0, for: 0, against: 0, diff: 0, form: [], points: 0 })
 
         return team
       })
@@ -86,8 +114,14 @@ export default {
         const points = b.results.points - a.results.points
         if (points !== 0) return points;
 
-        const gd = b.results.for - a.results.for;
+        const gd = b.results.diff - a.results.diff;
         if (gd !== 0) return gd;
+
+        const gf = b.results.for - a.results.for;
+        if (gf !== 0) return gf;
+
+        const played = b.results.played - a.results.played;
+        if (played !== 0) return played;
 
         return a.name > b.name ? 1 : -1;
       })

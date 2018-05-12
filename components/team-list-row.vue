@@ -10,7 +10,7 @@
     <td>{{ team.results.lost }}</td>
     <td class="secondary">{{ team.results.for }}</td>
     <td class="secondary">{{ team.results.against }}</td>
-    <td>{{ team.results.for - team.results.against }}</td>
+    <td>{{ team.results.diff }}</td>
     <td>{{ team.results.points }}</td>
     <td class="tertiary form">
       <span v-for="(form, i) in team.results.form" :key="i" :class="`form--${form}`"></span>

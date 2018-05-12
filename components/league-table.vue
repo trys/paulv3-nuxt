@@ -76,4 +76,11 @@
   
 }
 
+@media (min-width: 30em) {
+  .position {
+    width: 50px;
+    padding-right: 15px;
+  }
+}
+
 </style>

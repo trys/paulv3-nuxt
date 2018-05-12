@@ -40,13 +40,19 @@ export default {
   computed: {
     fixture_dates () {
       if (!this.fixtures) return null
-      return this.fixtures.reduce((current, fixture) => {
+      const fixture_groups = this.fixtures.reduce((current, fixture) => {
         const date = new Date(fixture.date)
         const key = `${date.getDate()}${date.getMonth()}`
         if (!current[key]) current[key] = []
         current[key].push(fixture)
-        return current;
-      }, {});
+        return current
+      }, {})
+
+      Object.keys(fixture_groups).forEach(key => {
+        fixture_groups[key].sort((a, b) => new Date(a.date) > new Date(b.date));
+      })
+
+      return fixture_groups
     },
 
     predictions () {

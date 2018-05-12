@@ -4,6 +4,7 @@
       <h1>Teams</h1>
     </header>
     <div class="page-wrapper page-wrapper--padded">
+      <p-populate />
       <teams-list :teams="teams" :fixtures="fixtures" />
     </div>
   </div>
@@ -11,6 +12,7 @@
 
 <script>
 import teamsList from '~/components/teams-list'
+import pPopulate from '~/components/populate'
 export default {
   async asyncData({ store }) {
     const [teams, fixtures] = await Promise.all([
@@ -29,7 +31,8 @@ export default {
   },
 
   components: {
-    teamsList
+    teamsList,
+    pPopulate
   }
 }
 </script>
