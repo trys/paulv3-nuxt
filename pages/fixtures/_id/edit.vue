@@ -55,6 +55,10 @@ export default {
             data.score_one = score_one
             data.score_two = score_two
             data.final_score = final_score
+
+            if (!data.final_score) {
+              data.final_score = score_one + '-' + score_two
+            }
           }
 
           await this.$store.dispatch('api', {

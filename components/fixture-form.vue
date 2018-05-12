@@ -68,7 +68,7 @@ export default {
     const fixture = this.fixture || {}
     const date = new Date(fixture.date);
     date.setHours(date.getHours() - 1);
-    console.log(date)
+
     return {
       date: fixture.date ? date : '2018-06-15 12:00',
       team_one_id: fixture.team_one_id || '',
