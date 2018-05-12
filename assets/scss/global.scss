@@ -77,6 +77,12 @@ ul {
   &-header {
     text-shadow: -1px 1px 1px rgba(0, 0, 0, 0.2);
     text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    h1 {
+      letter-spacing: 0.1em;
+    }
 
     h1 + h2 {
       margin-top: -20px;
@@ -96,4 +102,32 @@ ul {
   margin: 0 0 50px;
   color: #43555C;
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+
+.lines {
+    display: grid;
+    grid-template-columns: minmax(20px, 50px) auto minmax(20px, 50px);
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    grid-gap: 10px;
+    width: 100%;
+    margin: 0;
+}
+
+.lines:before,
+.lines:after {
+    content: '';
+    border-top: 1px solid;
+}
+
+
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }

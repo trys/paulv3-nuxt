@@ -25,7 +25,6 @@
             v-for="fixture in today"
             :key="fixture.id"
             :fixture="fixture"
-            :prediction="predictions.find(p => p.fixture_id === fixture.id)"
           ></fixture-preview>
         </div>
         <div v-else>
@@ -59,10 +58,6 @@ export default {
   computed: {
     user () {
       return this.$store.state.user
-    },
-
-    predictions () {
-      return this.$store.state.predictions
     },
 
     today () {

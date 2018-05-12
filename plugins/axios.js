@@ -25,7 +25,6 @@ if (process.server && process.static) {
     async function (response) {
       // Do something with response data
       const path = join(process.env.dataDir, response.request.path + '.json')
-      console.log('Save', path)
       await mkdirp(dirname(path))
       writeFileSync(path, JSON.stringify(response.data))
       return response

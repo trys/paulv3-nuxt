@@ -14,7 +14,6 @@
           v-for="fixture in fixtures"
           :key="fixture.id"
           :fixture="fixture"
-          :prediction="predictions.find(p => p.fixture_id === fixture.id)"
         />
       </div>
     </div>

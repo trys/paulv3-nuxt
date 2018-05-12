@@ -14,10 +14,7 @@
         v-for="fixture in fixtures"
         :key="fixture.id"
         class="fixture-date">
-          <fixture-preview
-            :fixture="fixture"
-            :prediction="predictions.find(p => p.fixture_id === fixture.id)"
-          />
+          <fixture-preview :fixture="fixture"/>
       </div>
     </div>
   </div>
@@ -34,6 +31,9 @@ export default {
     const team = teams.find(t => t.slug === String(params.id).substring(0, 15))
     if (!team) return callback({ statusCode: 404, message: 'Team not found' })
     const fixtures = allFixtures.filter(f => f.team_one.id === team.id || f.team_two.id === team.id)
+    fixtures.sort((a, b) => {
+      return new Date(a.date) - new Date(b.date)
+    });
     return callback(null, { team, fixtures })
   },
 
@@ -45,12 +45,6 @@ export default {
 
   components: {
     fixturePreview
-  },
-
-  computed: {
-    predictions () {
-      return this.$store.state.predictions
-    }
   }
 }
 </script>

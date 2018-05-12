@@ -14,6 +14,7 @@
   padding: 80px 20px 50px;
   display: flex;
   width: 100%;
+  color: #F56969;
 }
 
 .center-page__container:before,
@@ -38,8 +39,9 @@
   max-width: 400px;
   position: relative;
   padding: 20px;
-  color: #F56969;
+  color: inherit;
   width: 100%;
+  pointer-events: all;
 }
 
 .center-page__container > header {

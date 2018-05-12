@@ -1,22 +1,51 @@
 <template>
-  <aside :class="{
-    'add-prediction': true,
-    active: !!active
-  }">
-    <div class="wrapper">
-      <center-page v-if="active">
-        <header>
-          <h1>Prediction for {{ active.team_one.name }} vs. {{ active.team_two.name }}</h1>
-        </header>
-        <form method="POST" @submit.prevent="addPrediction">
-          <h3 v-if="error">{{ error }}</h3>
-          <label>Email: <br><input type="email" name="email" required></label><br>
-          <button class="button" type="submit">Save</button>
-        </form>
-      </center-page>
-    </div>
-    <span class="bg" @click="close" />
-  </aside>
+  <transition name="fade">
+    <aside v-show="!!active" class="add-prediction">
+      <div class="wrapper">
+        <span class="bg" @click="close" />
+        <center-page v-if="active">
+          <header>
+            <h3 class="lines">Prediction</h3>
+            <h4>{{ active.team_one.name }} vs. {{ active.team_two.name }}</h4>
+            <h3 v-if="error" class="error">{{ error }}</h3>
+          </header>
+          <form method="POST" @submit.prevent="addPrediction">
+            <div class="scores">
+              <div>
+                <label for="score_one">{{ active.team_one.name }}</label>
+                <input
+                  type="number"
+                  :value="active_prediction ? active_prediction.score_one : null"
+                  id="score_one"
+                  min="0"
+                  max="99"
+                  step="1"
+                  name="score_one"
+                  required
+                >
+              </div>
+
+              <div>
+                <label for="score_two">{{ active.team_two.name }}</label>
+                <input
+                  type="number"
+                  :value="active_prediction ? active_prediction.score_two : null"
+                  id="score_two"
+                  min="0"
+                  max="99"
+                  step="1"
+                  name="score_two"
+                  required
+                >
+              </div>
+            </div>
+
+            <button class="button" type="submit">{{ button }}</button>
+          </form>
+        </center-page>
+      </div>
+    </aside>
+  </transition>
 </template>
 
 <script>
@@ -28,24 +57,42 @@ export default {
 
   data () {
     return {
-      error: ''
+      error: '',
+      button: 'Save'
     }
   },
 
   computed: {
     active () {
       return this.$store.state.editing
+    },
+
+    active_prediction () {
+      return this.$store.getters.editing_prediction
     }
   },
 
   methods: {
-    addPrediction (event) {
+    async addPrediction (event) {
       this.error = ''
-      
+      this.button = 'Saving'
+      try {
+        await this.$store.dispatch('addPrediction', {
+          id: this.active.id,
+          score_one: event.target.score_one.value,
+          score_two: event.target.score_two.value
+        });
+
+        this.$store.commit('updateEditing', false)
+        this.button = 'Save'
+
+      } catch(e) {
+        this.error = 'Error adding prediction'
+      }
     },
 
     close () {
-      this.$store.commit('updateEditing', false) 
+      this.$store.commit('updateEditing', false)
     }
   }
 }
@@ -53,29 +100,22 @@ export default {
 
 <style lang="scss" scoped>
 .add-prediction {
-  transition: 300ms opacity, 300ms visibility;
-  visibility: hidden;
-  opacity: 0;
   position: fixed;
   height: 100%;
   width: 100%;
   left: 0;
   top: 0;
+}
 
-  &.active {
-    opacity: 1;
-    visibility: visible;
-  }
+.error {
+  color: #F56969;
 }
 
 .center-page {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   pointer-events: none;
-
-  &__container {
-    pointer-events: auto;
-  }
+  color: #43555C;
 }
 
 .bg {
@@ -86,5 +126,31 @@ export default {
   width: 100%;
   left: 0;
   top: 0;
+}
+
+h4 {
+  font-weight: 400;
+}
+
+label {
+  margin: 0;
+}
+
+input {
+  color: #43555C;
+  border-color: #C8C4CF;
+  padding: 8px;
+}
+
+.scores {
+  display: grid;
+  grid-gap: 15px;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 0 15px;
+}
+
+button {
+  width: 120px;
+  outline: none;
 }
 </style>

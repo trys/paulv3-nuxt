@@ -30,6 +30,34 @@ const createStore = () => {
         return data
       },
 
+      async addPrediction({ state, commit, getters }, payload) {
+        const user = state.auth.currentUser()
+        if (user) {
+          const token = await user.jwt();
+
+          try {
+            const { data } = await axios({
+              url: `/predictions/${payload.id}`,
+              method: 'put',
+              headers: {
+                authorization: 'Bearer ' + token
+              },
+              data: {
+                score_one: payload.score_one,
+                score_two: payload.score_two
+              }
+            });
+
+            commit('addPrediction', data)
+
+          } catch (e) {
+            console.log(e)
+            throw new Error(JSON.stringify(e.response.data.error));
+          }
+
+        }
+      },
+
       async api ({ state }, { url, method, data }) {
         if (!state.user) throw new Error('Please log in');
         await state.user.jwt();
@@ -45,15 +73,26 @@ const createStore = () => {
       }
     },
 
+    getters: {
+      editing_prediction: state => {
+        return state.editing && state.predictions.length ? state.predictions.find(p => p.fixture_id === state.editing.id) : null;
+      }
+    },
+
     mutations: {
       addPredictions (state, predictions) {
         state.predictions = predictions
       },
 
       addPrediction (state, prediction) {
-        const current = state.predictions.findIndex(p => p.fixture.id === prediction.fixture.id)
-        if (current !== -1) state.predictions[current] = prediction
-        else state.predictions.push(prediction)
+        const current = state.predictions.findIndex(p => p.fixture_id === prediction.fixture_id)
+        if (current !== -1) {
+          const c = state.predictions[current]
+          c.score_one = prediction.score_one
+          c.score_two = prediction.score_two
+        } else {
+          state.predictions.push(prediction)
+        }
       },
 
       addAuth (state, auth) {

@@ -13,15 +13,15 @@
 
     <small>{{ time }}
       <template v-if="fixture.score_one !== null">
-        <b>| </b> Score: <strong>{{ fixture.score_one }} - {{ fixture.score_two }}</strong>
+        <b> | </b> Score: <strong>{{ fixture.score_one }} - {{ fixture.score_two }}</strong>
       </template>
 
       <template v-if="prediction">
-        <b>| </b> Prediction: <strong>{{ prediction.score_one }} - {{ prediction.score_two }}</strong>
+        <b> | </b> Prediction: <strong>{{ prediction.score_one }} - {{ prediction.score_two }}</strong>
       </template>
 
       <no-ssr v-if="fixture.score_one === null && $store.state.user">
-        <span><b>| </b> <span class="edit" @click="edit">{{ prediction ? 'Edit' : 'Add prediction' }}</span></span>
+        <span><b> | </b> <span class="edit" @click="edit">{{ prediction ? 'Edit' : 'Add prediction' }}</span></span>
       </no-ssr>
     </small>
 
@@ -34,14 +34,14 @@ export default {
     fixture: {
       type: Object,
       required: true
-    },
-
-    prediction: {
-      type: Object
     }
   },
 
   computed: {
+    prediction () {
+      return this.$store.state.predictions.find(p => p.fixture_id === this.fixture.id)
+    },
+
     date () {
       return new Date(this.fixture.date)
     },
