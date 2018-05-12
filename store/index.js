@@ -31,6 +31,16 @@ const createStore = () => {
         return data
       },
 
+      async getFixture (store, id) {
+        if (!id || isNaN(id)) return null
+        try {
+          const { data } = await axios.get(`/fixtures/${id}`)
+          return data
+        } catch(e) {
+          return null
+        }
+      },
+
       async addPrediction({ state, commit, getters }, payload) {
         const user = state.auth.currentUser()
         if (user) {

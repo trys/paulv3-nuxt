@@ -22,7 +22,7 @@ const formatTime = (date) => {
 const formatDate = (date) => {
   date = new Date(date)
   const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  const months = { 5: 'June', 6: 'July' }
+  const months = { 4: 'May', 5: 'June', 6: 'July' }
   return `${days[date.getDay()]} ${ordinalSuffix(date.getDate())} ${months[date.getMonth()]}`
 }
 
