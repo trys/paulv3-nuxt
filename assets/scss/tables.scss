@@ -1,0 +1,133 @@
+.table-wrapper {
+    background: #FFF;
+    color: #43555C;
+    padding: 20px;
+    margin: 0 0 30px;
+}
+
+table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    font-size: 0.8em;
+    table-layout: fixed;
+
+    td,
+    th {
+        padding: 5px 1px;
+    }
+
+    .secondary,
+    .tertiary {
+        display: none;
+    }
+
+    @media (min-width: 28em) {
+        .secondary {
+            display: table-cell;
+        }
+    }
+
+    @media (min-width: 35em) {
+        .tertiary {
+            display: table-cell;
+        }
+    }
+
+    @media (min-width: 45em) {
+        font-size: 1em;
+        table-layout: auto;
+
+        thead {
+            font-size: 12px;
+        }
+
+        tbody {
+            td,
+            th {
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            tr + tr {
+                td,
+                th {
+                    border-top: 1px solid #EFE3E3;
+                }
+            }
+        }
+    }
+}
+
+.teams-list {
+    text-align: right;
+
+    .form {
+        text-align: left;
+        padding-left: 10px;
+    }
+
+    td {
+        width: auto;
+    }
+
+    th.form,
+    td.form {
+        width: 55px;
+    }
+
+    td.form span {
+        font-size: 0.7em;
+        padding: 3px;
+        margin: 0 0 0 -3px;
+        width: 11px;
+        height: 11px;
+        display: inline-block;
+        -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+
+        &:nth-child(even) {
+            transform: scaleY(-1);
+        }
+
+        &:first-child {
+            margin: 0;
+        }
+
+        &.form--D {
+            background: #BFC2C1;
+        }
+
+        &.form--W {
+            background: #20bf6b;
+        }
+
+        &.form--L {
+            background: #F56969;
+        }
+    }
+
+
+    th:first-child {
+        width: 88px;
+        text-align: left;
+        font-size: 0.9em;
+        padding-left: 0;
+        padding-right: 0;
+
+        @media (min-width: 40em) {
+            width: 105px;
+        }
+    }
+
+    thead {
+        span {
+            display: none;
+
+            @media (min-width: 40em) {
+                display: inline;
+            }
+        }
+    }
+}
+

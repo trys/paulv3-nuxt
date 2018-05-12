@@ -80,6 +80,7 @@ ul {
 }
 
 @import './assets/scss/forms';
+@import './assets/scss/tables';
 
 
 .page {
@@ -102,9 +103,15 @@ ul {
   }
 
   &-wrapper {
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
     padding-bottom: 30px;
+
+    &--padded {
+      padding-left: 20px;
+      padding-right: 20px;
+      max-width: 690px;
+    }
   }
 }
 

@@ -31,9 +31,7 @@ export default {
     const team = teams.find(t => t.slug === String(params.id).substring(0, 15))
     if (!team) return callback({ statusCode: 404, message: 'Team not found' })
     const fixtures = allFixtures.filter(f => f.team_one.id === team.id || f.team_two.id === team.id)
-    fixtures.sort((a, b) => {
-      return new Date(a.date) - new Date(b.date)
-    });
+    fixtures.sort((a, b) => new Date(a.date) - new Date(b.date));
     return callback(null, { team, fixtures })
   },
 

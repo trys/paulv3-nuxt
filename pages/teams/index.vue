@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <h1>Teams</h1>
-    <teams-list :teams="teams" />
+  <div class="page">
+    <header class="page-header">
+      <h1>Teams</h1>
+    </header>
+    <div class="page-wrapper page-wrapper--padded">
+      <teams-list :teams="teams" :fixtures="fixtures" />
+    </div>
   </div>
 </template>
 
@@ -9,8 +13,14 @@
 import teamsList from '~/components/teams-list'
 export default {
   async asyncData({ store }) {
+    const [teams, fixtures] = await Promise.all([
+      store.dispatch('getTeams'),
+      store.dispatch('getFixtures')
+    ])
+
     return {
-      teams: await store.dispatch('getTeams')
+      teams,
+      fixtures
     }
   },
 
