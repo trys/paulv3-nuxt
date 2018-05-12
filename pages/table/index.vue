@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <h1>Table</h1>
-    <league-table :results="results" />
+  <div class="page">
+    <header class="page-header">
+      <h1>Table</h1>
+    </header>
+    <div class="page-wrapper page-wrapper--padded">
+      <league-table :results="results" />
+    </div>
   </div>
 </template>
 

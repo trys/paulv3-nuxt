@@ -13,11 +13,6 @@
     <td>{{ team.results.for - team.results.against }}</td>
     <td>{{ team.results.points }}</td>
     <td class="tertiary form">
-      <span class="form--W"></span>
-      <span class="form--D"></span>
-      <span class="form--L"></span>
-      <span class="form--W"></span>
-      <span class="form--W"></span>
       <span v-for="(form, i) in team.results.form" :key="i" :class="`form--${form}`"></span>
     </td>
   </tr>
