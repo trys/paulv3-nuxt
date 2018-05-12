@@ -5,7 +5,7 @@
         <nuxt-link :to="{ name: 'teams-id', params: { id: fixture.team_one.slug } }">{{ fixture.team_one.name }}</nuxt-link>
         vs. <nuxt-link :to="{ name: 'teams-id', params: { id: fixture.team_two.slug } }">{{ fixture.team_two.name }}</nuxt-link>
       </h1>
-      <h2>Kickoff: {{ gametime }}</h2>
+      <h2>{{ gametime }}</h2>
     </header>
     <div class="page-wrapper">
     
