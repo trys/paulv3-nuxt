@@ -12,22 +12,30 @@
           >
             {{ challenge.question }}
             <team-picker
+              v-if="challenge.type === 'teams'"
               :teams="teams"
               @change="saveAnswer($event, challenge.id)"
             />
+            <form @submit.prevent="saveAnswer($event.target.answer.value, challenge.id)" class="number-answer">
+              <input type="number" min="0" max="999" step="1" required name="answer" />
+              <button type="submit">Save answer</button>
+            </form>
           </li>
         </ul>
         <div v-else>
-          <ul v-if="answers.length">
+          <ul v-if="answers && answers.length">
             <li
               v-for="answer in answers"
               :key="answer.id"
             >
               <h4>{{ allChallenges.find(c => c.id === answer.challenge_id).question }}</h4>
               <p>{{ allChallenges.find(c => c.id === answer.challenge_id).type === 'teams' ? teams.find(t => t.id === answer.answer).name : answer.answer }}</p>
-              
+              <admin-only>
+                <nuxt-link :to="{ name: 'challenges-id-edit', params: { id: answer.challenge_id } }">Edit</nuxt-link>
+              </admin-only>
             </li>
           </ul>
+          <h3 v-else>Loading challenges</h3>
         </div>
       </no-ssr>
     </div>
@@ -36,7 +44,7 @@
 
 <script>
 import teamPicker from '~/components/team-picker'
-import axios from '~/plugins/axios'
+import adminOnly from '~/components/admin-only'
 
 export default {
   async asyncData ({ store }) {
@@ -61,6 +69,7 @@ export default {
 
     challenges () {
       return this.allChallenges.filter(challenge => {
+        if (this.answers === false) return false
         if (new Date(challenge.date).getTime() < new Date().getTime()) return false
         if (this.answers.find(a => a.challenge_id === challenge.id)) return false
         return true
@@ -69,7 +78,8 @@ export default {
   },
 
   components: {
-    teamPicker
+    teamPicker,
+    adminOnly
   },
 
   head() {
@@ -79,7 +89,7 @@ export default {
   },
 
   methods: {
-    async saveAnswer (answer, id) { 
+    async saveAnswer (answer, id) {
       await this.$store.dispatch('addChallengePrediction', {
         id,
         answer

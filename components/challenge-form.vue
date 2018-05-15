@@ -21,7 +21,7 @@
       </div>
       <div v-else>
         <label for="type">Answer</label>
-        <input type="number" min="1" max="10" step="1" name="answer" :value="challenge.answer || ''" id="answer" required />
+        <input type="number" min="1" max="10" step="1" name="answer" :value="challenge.answer || ''" id="answer" />
       </div>
 
       <div>

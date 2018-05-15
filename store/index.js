@@ -5,7 +5,7 @@ const createStore = () => {
   return new Vuex.Store({
     state: {
       predictions: [],
-      challengePredictions: [],
+      challengePredictions: false,
       user: false,
       auth: null,
       teams: [],
@@ -43,8 +43,8 @@ const createStore = () => {
         }
       },
 
-      async getChallenges ({ state, commit }) {
-        if (state.challenges.length) return state.challenges
+      async getChallenges ({ state, commit }, force = false) {
+        if (state.challenges.length && !force) return state.challenges
 
         const { data } = await axios.get('/challenges')
         commit('addChallenges', data)
@@ -144,6 +144,7 @@ const createStore = () => {
       },
 
       addChallengePrediction(state, { challenge_id, answer }) {
+        if (state.challengePredictions === false) state.challengePredictions = []
         const current = state.challengePredictions.findIndex(p => p.challenge_id === challenge_id)
         if (current !== -1) {
           const c = state.challengePredictions[current]
