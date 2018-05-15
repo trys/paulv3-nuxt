@@ -24,7 +24,7 @@
         <span><b> | </b> <span class="edit" @click="edit">{{ prediction ? 'Edit' : 'Add prediction' }}</span></span>
       </no-ssr>
     </small>
-
+    
   </article>
 </template>
 

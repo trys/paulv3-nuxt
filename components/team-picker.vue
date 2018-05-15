@@ -4,10 +4,10 @@
     @input="$emit('input', $event.target.value)"
     :value="value"
     :name="name"
-    required
+    :required="required"
   >
     <option value="">Pick a team</option>
-    <option v-for="team in teams" :value="String(team.id)">{{ team.name }}</option>
+    <option v-for="team in teams" :key="team.id" :value="String(team.id)">{{ team.name }}</option>
   </select>
 </template>
 
@@ -16,7 +16,13 @@ export default {
   props: {
     teams: Array,
     value: [String, Number],
-    name: String
+    name: [String, Number],
+    required: {
+      type: Boolean,
+      default () {
+        return true
+      }
+    }
   }
 }
 </script>

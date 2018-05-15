@@ -5,10 +5,12 @@ const createStore = () => {
   return new Vuex.Store({
     state: {
       predictions: [],
+      challengePredictions: [],
       user: false,
       auth: null,
       teams: [],
       fixtures: [],
+      challenges: [],
       menu: false,
       editing: false,
       predictions_populated: false
@@ -41,6 +43,14 @@ const createStore = () => {
         }
       },
 
+      async getChallenges ({ state, commit }) {
+        if (state.challenges.length) return state.challenges
+
+        const { data } = await axios.get('/challenges')
+        commit('addChallenges', data)
+        return data
+      },
+
       async addPrediction({ state, commit, getters }, payload) {
         const user = state.auth.currentUser()
         if (user) {
@@ -60,6 +70,33 @@ const createStore = () => {
             });
 
             commit('addPrediction', data)
+
+          } catch (e) {
+            console.log(e)
+            throw new Error(JSON.stringify(e.response.data.error));
+          }
+
+        }
+      },
+
+      async addChallengePrediction({ state, commit, getters }, { id, answer }) {
+        const user = state.auth.currentUser()
+        if (user) {
+          const token = await user.jwt();
+
+          try {
+            const { data } = await axios({
+              url: `/challenge-predictions/${id}`,
+              method: 'post',
+              headers: {
+                authorization: 'Bearer ' + token
+              },
+              data: {
+                answer
+              }
+            });
+
+            commit('addChallengePrediction', data)
 
           } catch (e) {
             console.log(e)
@@ -106,6 +143,16 @@ const createStore = () => {
         }
       },
 
+      addChallengePrediction(state, { challenge_id, answer }) {
+        const current = state.challengePredictions.findIndex(p => p.challenge_id === challenge_id)
+        if (current !== -1) {
+          const c = state.challengePredictions[current]
+          c.answer = answer
+        } else {
+          state.challengePredictions.push({ challenge_id, answer })
+        }
+      },
+
       addAuth (state, auth) {
         state.auth = auth
       },
@@ -116,6 +163,10 @@ const createStore = () => {
 
       addFixtures (state, fixtures) {
         state.fixtures = fixtures
+      },
+
+      addChallenges (state, challenges) {
+        state.challenges = challenges
       },
 
       addUser (state, user) {

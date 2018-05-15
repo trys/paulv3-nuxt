@@ -8,7 +8,7 @@
       <h2>{{ gametime }}</h2>
     </header>
     <div class="page-wrapper page-wrapper--padded">
-      <!-- <div class="scorelines" v-if="prediction || fixture.score_one !== null">
+      <div class="scorelines" v-if="prediction || fixture.score_one !== null">
         <div v-if="prediction">
           Your prediction: {{ prediction.score_one }}-{{ prediction.score_two }}
         </div>
@@ -18,7 +18,7 @@
         <div v-if="fixture.score_one !== null">
           Final score: {{ fixture.final_score }}
         </div>
-      </div> -->
+      </div>
 
       <div class="table-wrapper" v-if="orderedPredictions.length">
         <h3>Predictions</h3>
