@@ -51,7 +51,7 @@ export default {
     },
 
     month () {
-      const months = { 5: 'Jun', 6: 'Jul' }
+      const months = { 4: 'May', 5: 'Jun', 6: 'Jul' }
       return months[this.date.getMonth()]
     },
 

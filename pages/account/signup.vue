@@ -9,7 +9,7 @@
     </header>
     <form method="POST" action="/account/signup/" @submit.prevent="signup">
       <h3 v-if="error">{{ error }}</h3>
-      <label>Name: <br><input type="text" name="name" required></label><br>
+      <label>Username: <br><input type="text" name="name" required></label><br>
       <label>Email: <br><input type="email" name="email" required></label><br>
       <label>Password: <br><input type="password" name="password" required></label><br>
       <button class="button" type="submit">Sign up</button>
@@ -47,10 +47,14 @@ export default {
         { full_name: event.target.name.value }
       ).then(
         response => {
-          window.location.href = '/'
+          window.location.href = '/account/thank-you'
         },
         error => {
           this.error = error.json.msg
+          if (this.error === 'Failed to handle signup webhook') {
+            event.target.name.value = ''
+            this.error = 'Someone with that username already exists'
+          }
           event.target.password.value = ''
         }
       )

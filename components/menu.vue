@@ -3,9 +3,11 @@
     <button type="button" :class="{ active, navicon: true }" @click="$store.commit('toggleMenu')">Menu</button>
     <nav :class="{ active }">
       <nuxt-link :to="{ name: 'index' }">Home</nuxt-link>
-      <nuxt-link :to="{ name: 'groups' }">Teams</nuxt-link>
-      <nuxt-link :to="{ name: 'table' }">Table</nuxt-link>
       <nuxt-link :to="{ name: 'fixtures' }">Fixtures</nuxt-link>
+      <nuxt-link :to="{ name: 'groups' }">Teams</nuxt-link>
+      <nuxt-link :to="{ name: 'challenges' }">Challenges</nuxt-link>
+      <nuxt-link :to="{ name: 'table' }">Table</nuxt-link>
+
     </nav>
   </header>
 </template>

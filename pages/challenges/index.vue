@@ -28,11 +28,10 @@
               v-for="answer in answers"
               :key="answer.id"
             >
-              <h4>{{ allChallenges.find(c => c.id === answer.challenge_id).question }}</h4>
-              <p>{{ allChallenges.find(c => c.id === answer.challenge_id).type === 'teams' ? teams.find(t => t.id === answer.answer).name : answer.answer }}</p>
-              <admin-only>
+              <h4>{{ allChallenges.find(c => c.id === answer.challenge_id).question }} <admin-only>
                 <nuxt-link :to="{ name: 'challenges-id-edit', params: { id: answer.challenge_id } }">Edit</nuxt-link>
-              </admin-only>
+              </admin-only></h4>
+              <p>{{ allChallenges.find(c => c.id === answer.challenge_id).type === 'teams' ? teams.find(t => t.id === answer.answer).name : answer.answer }}</p>
             </li>
           </ul>
           <h3 v-else>Loading challenges</h3>
