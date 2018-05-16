@@ -23,13 +23,24 @@
 <script>
 import fixturePreview from '~/components/fixture'
 export default {
-  async asyncData({ params, store }, callback) {
-    const [teams, allFixtures] = await Promise.all([
-      store.dispatch('getTeams'),
-      store.dispatch('getFixtures')
-    ])
-    const team = teams.find(t => t.slug === String(params.id).substring(0, 15))
-    if (!team) return callback({ statusCode: 404, message: 'Team not found' })
+  async asyncData({ params, store, payload}, callback) {
+    let allFixtures
+    let team
+
+    if (payload) {
+      allFixtures = payload.fixtures
+      team = payload.team
+    } else {
+      const [teams, fixtures] = await Promise.all([
+        store.dispatch('getTeams'),
+        store.dispatch('getFixtures')
+      ])
+
+      allFixtures = fixtures
+      team = teams.find(t => t.slug === String(params.id).substring(0, 15))
+      if (!team) return callback({ statusCode: 404, message: 'Team not found' })
+    }
+
     const fixtures = allFixtures.filter(f => f.team_one.id === team.id || f.team_two.id === team.id)
     fixtures.sort((a, b) => new Date(a.date) > new Date(b.date));
     return callback(null, { team, fixtures })

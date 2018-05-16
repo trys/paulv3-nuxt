@@ -38,7 +38,7 @@ export default {
       if (this.$route.hash && this.$route.hash.indexOf('#confirmation_token') === 0) {
         this.token = this.$route.hash.replace('#confirmation_token=', '')
         this.$store.state.auth.confirm(this.token, true).then(
-          user => window.location.href = '/',
+          user => window.location.href = '/welcome',
           error => {
             this.error = error.json.msg
             setTimeout(() => window.location.href = '/', 2000)

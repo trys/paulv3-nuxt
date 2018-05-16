@@ -81,7 +81,12 @@ export default {
 
   props: {
     teams: Array,
-    fixture: Object
+    fixture: {
+      type: Object,
+      default () {
+        return {}
+      }
+    }
   },
 
   components: {
