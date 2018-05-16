@@ -37,21 +37,20 @@ module.exports = {
     interval: 100,
     routes: async () => {
       const routes = ['/table', '/fixtures', '/fixtures/create', '/challenges/create', '/teams', '/groups', '/groups/a', '/groups/b', '/groups/c', '/groups/d', '/groups/e', '/groups/f', '/groups/g', '/groups/h', '/challenges']
-      const [teams, fixtures] = await Promise.all([
+      const [teams, fixtures, build] = await Promise.all([
         axios.get('https://api.paultheoctop.us/teams'),
-        axios.get('https://api.paultheoctop.us/fixtures')
+        axios.get('https://api.paultheoctop.us/fixtures'),
+        axios.get('https://api.paultheoctop.us/fixtures/build')
       ])
 
       teams.data.forEach(team => routes.push({
         route: `/teams/${team.slug}`,
         payload: { team, fixtures: fixtures.data }
       }))
-      fixtures.data.forEach(fixture => routes.push(`/fixtures/${fixture.id}`))
-
-      // return axios.get('https://jsonplaceholder.typicode.com/users').then((res) => {
-      //   const users = res.data
-      //   return users.map(user => `/users/${user.id}`)
-      // })
+      fixtures.data.forEach(fixture => routes.push({
+        route: `/fixtures/${fixture.id}`,
+        payload: build.data.find(f => f.id === fixture.id)
+      }))
 
       return routes
     }
