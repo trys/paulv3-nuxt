@@ -10,8 +10,9 @@
 export default {
   computed: {
     active () {
-      if (!this.$store.state.user) return false
-      return this.$store.state.user.app_metadata.roles[0] === "FullAdmin"
+      const user = this.$store.state.user
+      if (!user || !user.app_metadata || !user.app_metadata.roles || !user.app_metadata.length) return false
+      return user && user.app_metadata.roles[0] === "FullAdmin"
     }
   }
 }

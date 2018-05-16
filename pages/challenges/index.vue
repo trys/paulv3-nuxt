@@ -5,36 +5,46 @@
     </header>
     <div class="page-wrapper page-wrapper--padded form-style">
       <no-ssr>
-        <ul v-if="challenges.length">
-          <li
-            v-for="challenge in challenges"
-            :key="challenge.id"
-          >
-            {{ challenge.question }}
-            <team-picker
-              v-if="challenge.type === 'teams'"
-              :teams="teams"
-              @change="saveAnswer($event, challenge.id)"
-            />
-            <form @submit.prevent="saveAnswer($event.target.answer.value, challenge.id)" class="number-answer">
-              <input type="number" min="0" max="999" step="1" required name="answer" />
-              <button type="submit">Save answer</button>
-            </form>
-          </li>
-        </ul>
-        <div v-else>
-          <ul v-if="answers && answers.length">
+        <div>
+          <ul v-if="challenges.length">
             <li
-              v-for="answer in answers"
-              :key="answer.id"
+              v-for="challenge in challenges"
+              :key="challenge.id"
             >
-              <h4>{{ allChallenges.find(c => c.id === answer.challenge_id).question }} <admin-only>
-                <nuxt-link :to="{ name: 'challenges-id-edit', params: { id: answer.challenge_id } }">Edit</nuxt-link>
-              </admin-only></h4>
-              <p>{{ allChallenges.find(c => c.id === answer.challenge_id).type === 'teams' ? teams.find(t => t.id === answer.answer).name : answer.answer }}</p>
+              {{ challenge.question }}
+              <form @submit.prevent="saveAnswer($event.target.answer.value, challenge.id)">
+                <team-picker
+                  v-if="challenge.type === 'teams'"
+                  :teams="teams"
+                  name="answer"
+                />
+                <input
+                  v-else
+                  type="number"
+                  max="999"
+                  min="0"
+                  step="1"
+                  name="answer"
+                  required
+                />
+                <button type="submit">Save answer</button>
+              </form>
             </li>
           </ul>
-          <h3 v-else>Loading challenges</h3>
+          <div v-if="answers && answers.length">
+            <ul>
+              <li
+                v-for="answer in answers"
+                :key="answer.id"
+              >
+                <h4>{{ allChallenges.find(c => c.id === answer.challenge_id).question }} <admin-only>
+                  <nuxt-link :to="{ name: 'challenges-id-edit', params: { id: answer.challenge_id } }">Edit</nuxt-link>
+                </admin-only></h4>
+                <p>{{ allChallenges.find(c => c.id === answer.challenge_id).type === 'teams' ? teams.find(t => t.id === answer.answer).name : answer.answer }}</p>
+              </li>
+            </ul>
+          </div>
+          <h3 v-if="!answers && !challenges.length">Loading challenges</h3>
         </div>
       </no-ssr>
     </div>

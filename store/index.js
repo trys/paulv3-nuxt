@@ -96,6 +96,7 @@ const createStore = () => {
               }
             });
 
+            commit('primeChallengePredictions')
             commit('addChallengePrediction', data)
 
           } catch (e) {
@@ -143,8 +144,11 @@ const createStore = () => {
         }
       },
 
-      addChallengePrediction(state, { challenge_id, answer }) {
+      primeChallengePredictions (state) {
         if (state.challengePredictions === false) state.challengePredictions = []
+      },
+
+      addChallengePrediction(state, { challenge_id, answer }) {
         const current = state.challengePredictions.findIndex(p => p.challenge_id === challenge_id)
         if (current !== -1) {
           const c = state.challengePredictions[current]

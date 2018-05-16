@@ -34,6 +34,7 @@ module.exports = {
   
   // Generate dynamic routes
   generate: {
+    fallback: true,
     interval: 100,
     routes: async () => {
       const mkdirp = require('mkdirp-promise')
