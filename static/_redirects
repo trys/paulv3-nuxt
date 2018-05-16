@@ -1,1 +1,2 @@
 /data/predictions.json  https://api.paultheoctop.us/predictions  200
+/data/predictions/*.json  https://api.paultheoctop.us/predictions/:splat  200
