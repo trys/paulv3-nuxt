@@ -49,8 +49,15 @@ import { formatDateTime } from '~/plugins/time'
 export default {
   async asyncData({ params, store, payload }, callback) {
     let fixture
-    if (payload) fixture = payload
-    else fixture = await store.dispatch('getFixture', Number(params.id))
+    if (payload) {
+      fixture = payload
+    } else {
+      if (store.state.fixtures.length) {
+        const f = store.state.fixtures.find(f => f.id === Number(params.id))
+        if (f.score_one === null) fixture = f
+      }
+      fixture = fixture || await store.dispatch('getFixture', Number(params.id))
+    }
 
     if (!fixture) return callback({ statusCode: 404, message: 'Fixture not found' })    
     return callback(null, { fixture })
