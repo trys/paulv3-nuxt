@@ -16,23 +16,33 @@
         </tr>  
       </thead>
       <tbody>
-        <team-list-row
+        <tr
           v-for="team in orderedTeams"
           :key="team.id"
-          :team="team"
-        />
+          >
+          <th>
+            <nuxt-link :to="{ name: 'teams-id', params: { id: team.slug } }">{{ team.name }}</nuxt-link>
+          </th>
+
+          <td>{{ team.results.played }}</td>
+          <td>{{ team.results.won }}</td>
+          <td>{{ team.results.drawn }}</td>
+          <td>{{ team.results.lost }}</td>
+          <td class="secondary">{{ team.results.for }}</td>
+          <td class="secondary">{{ team.results.against }}</td>
+          <td>{{ team.results.diff }}</td>
+          <td>{{ team.results.points }}</td>
+          <td class="tertiary form">
+            <span v-for="(form, i) in team.results.form" :key="i" :class="`form--${form}`"></span>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
 </template>
 
 <script>
-import TeamListRow from './team-list-row'
 export default {
-  components: {
-    TeamListRow
-  },
-
   props: {
     teams: {
       type: Array,
@@ -62,7 +72,6 @@ export default {
           const has_team = f.team_one_id === team.id || f.team_two_id === team.id
           if (!has_team) return false;
 
-          console.log('a', !!this.predictions.find(p => p.fixture_id === f.id))
           return f.score_one !== null || (this.populated && !!this.predictions.find(p => p.fixture_id === f.id))
         })
 
@@ -75,17 +84,15 @@ export default {
           let score_against = f[opposition]
 
           if (this.populated) {
-            console.log('b')
             const prediction = this.predictions.find(p => p.fixture_id === f.id)
             if (prediction) {
-              console.log('c')
               score_for = prediction[current]
               score_against = prediction[opposition]
             }
           }
 
           r.played++
-          r.agins += score_for
+          r.for += score_for
           r.against += score_against
           r.diff += score_for
           r.diff -= score_against
