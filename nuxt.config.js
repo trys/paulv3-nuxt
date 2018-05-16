@@ -36,6 +36,10 @@ module.exports = {
   generate: {
     interval: 100,
     routes: async () => {
+      const mkdirp = require('mkdirp-promise')
+      const { join, dirname } = require('path')
+      const { writeFileSync } = require('fs')
+
       const routes = 
       [
         '/groups/a',
@@ -47,10 +51,11 @@ module.exports = {
         '/groups/g',
         '/groups/h'
       ]
-      const [teams, fixtures, build] = await Promise.all([
+      const [teams, fixtures, build, challenges] = await Promise.all([
         axios.get('https://api.paultheoctop.us/teams'),
         axios.get('https://api.paultheoctop.us/fixtures'),
-        axios.get('https://api.paultheoctop.us/fixtures/build')
+        axios.get('https://api.paultheoctop.us/fixtures/build'),
+        axios.get('https://api.paultheoctop.us/challenges/')
       ])
 
       teams.data.forEach(team => routes.push({
@@ -58,16 +63,31 @@ module.exports = {
         payload: { team, fixtures: fixtures.data }
       }))
 
-      fixtures.data.forEach(fixture => routes.push({
+      build.data.forEach(fixture => routes.push({
         route: `/fixtures/${fixture.id}`,
-        payload: build.data.find(f => f.id === fixture.id)
+        payload: fixture
       }))
 
-      fixtures.data.forEach(fixture => routes.push({
+      build.data.forEach(fixture => routes.push({
         route: `/fixtures/${fixture.id}/edit`,
         payload: {
-          fixture: build.data.find(f => f.id === fixture.id),
-          teams
+          fixture,
+          teams: teams.data
+        }
+      }))
+
+      build.data.forEach(fixture => {
+        const path = `dist/data/fixtures/${fixture.id}.json`
+        mkdirp(dirname(path)).then(() => {
+          writeFileSync(path, JSON.stringify(fixture))
+        })
+      })
+
+      challenges.data.forEach(challenge => routes.push({
+        route: `/challenges/${challenge.id}/edit`,
+        payload: {
+          teams: teams.data,
+          challenge
         }
       }))
 

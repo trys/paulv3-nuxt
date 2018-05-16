@@ -12,12 +12,22 @@
 <script>
 import challengeForm from '~/components/challenge-form'
 export default {
-  async asyncData({ params, store }, callback) {
-    const [challenges, teams] = await Promise.all([
-      store.dispatch('getChallenges'),
-      store.dispatch('getTeams')
-    ]);
-    const challenge = challenges.find(f => String(f.id) === String(params.id))
+  async asyncData({ params, store, payload }, callback) {
+    let teams
+    let challenges
+    let challenge
+
+    if (payload) {
+      challenge = payload.challenge
+      teams = payload.teams
+    } else {
+      [challenges, teams] = await Promise.all([
+        store.dispatch('getChallenges'),
+        store.dispatch('getTeams')
+      ]);
+      challenge = challenges.find(f => String(f.id) === String(params.id))
+    }
+
     if (!challenge) return callback({ statusCode: 404, message: 'Challenge not found' })
     else return callback(null, { challenge, teams })
   },
