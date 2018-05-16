@@ -62,6 +62,7 @@ export default {
           const has_team = f.team_one_id === team.id || f.team_two_id === team.id
           if (!has_team) return false;
 
+          console.log('a', !!this.predictions.find(p => p.fixture_id === f.id))
           return f.score_one !== null || (this.populated && !!this.predictions.find(p => p.fixture_id === f.id))
         })
 
@@ -72,11 +73,12 @@ export default {
           const opposition = current === 'score_one' ? 'score_two' : 'score_one'
           let score_for = f[current]
           let score_against = f[opposition]
-          
-          
+
           if (this.populated) {
+            console.log('b')
             const prediction = this.predictions.find(p => p.fixture_id === f.id)
             if (prediction) {
+              console.log('c')
               score_for = prediction[current]
               score_against = prediction[opposition]
             }
