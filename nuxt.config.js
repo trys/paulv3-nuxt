@@ -36,7 +36,17 @@ module.exports = {
   generate: {
     interval: 100,
     routes: async () => {
-      const routes = ['/table', '/fixtures', '/fixtures/create', '/challenges/create', '/teams', '/groups', '/groups/a', '/groups/b', '/groups/c', '/groups/d', '/groups/e', '/groups/f', '/groups/g', '/groups/h', '/challenges']
+      const routes = 
+      [
+        '/groups/a',
+        '/groups/b',
+        '/groups/c',
+        '/groups/d',
+        '/groups/e',
+        '/groups/f',
+        '/groups/g',
+        '/groups/h'
+      ]
       const [teams, fixtures, build] = await Promise.all([
         axios.get('https://api.paultheoctop.us/teams'),
         axios.get('https://api.paultheoctop.us/fixtures'),
@@ -47,9 +57,18 @@ module.exports = {
         route: `/teams/${team.slug}`,
         payload: { team, fixtures: fixtures.data }
       }))
+
       fixtures.data.forEach(fixture => routes.push({
         route: `/fixtures/${fixture.id}`,
         payload: build.data.find(f => f.id === fixture.id)
+      }))
+
+      fixtures.data.forEach(fixture => routes.push({
+        route: `/fixtures/${fixture.id}/edit`,
+        payload: {
+          fixture: build.data.find(f => f.id === fixture.id),
+          teams
+        }
       }))
 
       return routes

@@ -12,12 +12,22 @@
 <script>
 import fixtureForm from '~/components/fixture-form'
 export default {
-  async asyncData({ params, store }, callback) {
-    const [fixtures, teams] = await Promise.all([
-      store.dispatch('getFixtures'),
-      store.dispatch('getTeams')
-    ]);
-    const fixture = fixtures.find(f => String(f.id) === String(params.id))
+  async asyncData({ params, store, payload }, callback) {
+    let fixture
+    let fixtures
+    let teams
+
+    if (payload) {
+      fixture = payload.fixture
+      teams = payload.teams
+    } else {
+      [fixtures, teams] = await Promise.all([
+        store.dispatch('getFixtures'),
+        store.dispatch('getTeams')
+      ]);
+      fixture = fixtures.find(f => String(f.id) === String(params.id))
+    }
+
     if (!fixture) return callback({ statusCode: 404, message: 'Fixture not found' })
     else return callback(null, { fixture, teams })
   },
