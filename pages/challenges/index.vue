@@ -45,7 +45,14 @@
               </li>
             </ul>
           </div>
-          <h3 v-if="!answers && !challenges.length">Loading challenges</h3>
+          <template v-if="$store.state.user">
+            <h3 v-if="!answers && !challenges.length">Loading challenges</h3>
+          </template>
+          <template v-else>
+            <p>
+              <nuxt-link :to="{ name: 'account-signup' }">Sign up</nuxt-link> or <nuxt-link :to="{ name: 'account-login' }">Login</nuxt-link> to view challenges.
+            </p>
+          </template>
         </div>
       </no-ssr>
     </div>
@@ -138,5 +145,9 @@ p {
 
 .form-style {
   margin-bottom: 30px;
+}
+
+p a {
+  text-decoration: underline;
 }
 </style>
