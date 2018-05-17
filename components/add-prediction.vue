@@ -82,7 +82,7 @@ export default {
           score_one: event.target.score_one.value,
           score_two: event.target.score_two.value
         });
-
+        
         this.$store.commit('updateEditing', false)
         this.button = 'Save'
 
@@ -101,6 +101,7 @@ export default {
 <style lang="scss" scoped>
 .add-prediction {
   position: fixed;
+  z-index: 1000;
   height: 100%;
   width: 100%;
   left: 0;
