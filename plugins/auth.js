@@ -1,7 +1,7 @@
 import axios from '~/plugins/axios'
 import GoTrue from 'gotrue-js';
 import Cookies from 'js-cookie'
-const url = 'https://paultheoctopus.netlify.com'
+const url = 'https://paultheoctop.us'
 
 export default async ({ store, route }) => {
 
