@@ -77,6 +77,8 @@ export default {
             data
           })
 
+          this.$store.dispatch('build')
+
           await this.$store.dispatch('getFixtures', true)
           this.$router.push({ name: 'fixtures-id', params: { id: this.fixture.id } })
         } catch(e) {

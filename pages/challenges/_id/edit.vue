@@ -66,6 +66,8 @@ export default {
             data
           })
 
+          this.$store.dispatch('build')
+
           await this.$store.dispatch('getChallenges', true)
           this.$router.push({ name: 'challenges' })
         } catch(e) {

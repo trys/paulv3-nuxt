@@ -16,8 +16,7 @@
           <nuxt-link v-if="!user" :to="{ name: 'account-signup' }" class="button">Sign up</nuxt-link>
           <nuxt-link v-else :to="{ name: 'account-logout' }" class="button">Logout</nuxt-link>
           <admin-only>
-            <button type="submit" class="button" form="build">Build</button>
-            <form method="POST" action="https://api.netlify.com/build_hooks/5afd7635b3127423d9ed00ee" id="build" target="_blank"/>
+            <button @click="$store.dispatch('build')" class="button">Build</button>
           </admin-only>
         </template>
       </nav>

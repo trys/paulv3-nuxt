@@ -51,6 +51,8 @@ export default {
             }
           })
 
+          this.$store.dispatch('build')
+
           event.target.reset()
           event.target.name.focus()
         } catch(e) {
