@@ -9,14 +9,18 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(result, i) in results" :key="i">
+        <tr v-for="result in results" :key="result.user_id">
           <td class="position">{{ result.position }} <span :class="{
             'shift': true,
             'shift-up': result.shift && result.shift > 0,
             'shift-down': result.shift && result.shift < 0,
             'shift-static': !result.shift
           }"></span></td>
-          <td class="user">{{ result.username }}</td>
+          <td class="user">
+            <nuxt-link :to="{ name: 'users-id', params: { id: result.user_id } }">
+              {{ result.username }}
+            </nuxt-link>
+          </td>
           <td class="points">{{ result.total }}</td>
         </tr>
       </tbody>
