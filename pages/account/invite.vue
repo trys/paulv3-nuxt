@@ -35,7 +35,7 @@ export default {
     confirm (event) {
       this.error = ''
       this.$store.state.auth.acceptInvite(this.token, event.target.password.value, true).then(
-        user => window.location.href = '/',
+        user => window.location.href = '/welcome',
         error => {
           console.log(error)
           this.error = error.json.error_description

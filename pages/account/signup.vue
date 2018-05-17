@@ -1,7 +1,7 @@
 <template>
   <center-page>
     <header>
-      <provider-login provider="google" label="Sign up with Google" />
+      <provider-login provider="google" @click="trackSignup" label="Sign up with Google" />
       <br>
       - or -
       <br>
@@ -58,6 +58,10 @@ export default {
           event.target.password.value = ''
         }
       )
+    },
+
+    trackSignup () {
+      localStorage.setItem('providerSignup', true)
     }
   }
 }

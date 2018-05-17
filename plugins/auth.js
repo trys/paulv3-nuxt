@@ -21,7 +21,13 @@ export default async ({ store, route }) => {
     await store.state.auth.createUser(options, true)
     .then((user) => {
       Cookies.set('nf_jwt', user.token.access_token, { expires: 1, secure: true });
-      window.location.href = '/'
+      const source = localStorage.getItem('providerSignup')
+      if (source) {
+        localStorage.removeItem('providerSignup')
+        window.location.href = '/welcome'
+      } else {
+        window.location.href = '/'
+      }
     })
     .catch(console.error)
   }
