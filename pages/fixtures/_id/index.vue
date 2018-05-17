@@ -20,7 +20,10 @@
         </div>
       </div>
 
-      <div class="table-wrapper" v-if="orderedPredictions.length">
+      <div
+        v-if="orderedPredictions.length"
+        class="table-wrapper"
+      >
         <h3>Predictions</h3>
         <table>
           <thead>
@@ -38,6 +41,9 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div v-else class="table-wrapper">
+        <h3>Predictions will become available when the match starts</h3>
       </div>
       
     </div>

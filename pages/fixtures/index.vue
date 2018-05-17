@@ -42,7 +42,7 @@ export default {
       if (!this.fixtures) return null
       const fixture_groups = this.fixtures.reduce((current, fixture) => {
         const date = new Date(fixture.date)
-        const key = `${date.getDate()}${date.getMonth()}`
+        const key = `${date.getMonth()}${date.getDate()}`
         if (!current[key]) current[key] = []
         current[key].push(fixture)
         return current

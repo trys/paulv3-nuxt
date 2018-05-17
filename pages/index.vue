@@ -15,6 +15,10 @@
           <nuxt-link v-if="!user" :to="{ name: 'account-login' }" class="button">Login</nuxt-link>
           <nuxt-link v-if="!user" :to="{ name: 'account-signup' }" class="button">Sign up</nuxt-link>
           <nuxt-link v-else :to="{ name: 'account-logout' }" class="button">Logout</nuxt-link>
+          <admin-only>
+            <button type="submit" class="button" form="build">Build</button>
+            <form method="POST" action="https://api.netlify.com/build_hooks/5afd7635b3127423d9ed00ee" id="build" target="_blank"/>
+          </admin-only>
         </template>
       </nav>
       <div class="home__content">
@@ -39,6 +43,7 @@
 <script>
 import paulLogo from '@/components/logo'
 import fixturePreview from '@/components/fixture'
+import adminOnly from '@/components/admin-only'
 export default {
   async asyncData({ store }) {
     return {
@@ -52,7 +57,8 @@ export default {
 
   components: {
     paulLogo,
-    fixturePreview
+    fixturePreview,
+    adminOnly
   },
 
   computed: {
