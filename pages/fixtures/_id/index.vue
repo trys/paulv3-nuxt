@@ -117,7 +117,6 @@ export default {
 
 <style lang="scss" scoped>
 .scorelines {
-  border-bottom: 2px solid;
   margin-bottom: 30px;
   padding: 0 20px;
   display: flex;
