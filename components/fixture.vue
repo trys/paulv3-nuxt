@@ -20,7 +20,7 @@
         <b> | </b> Prediction: <strong>{{ prediction.score_one }} - {{ prediction.score_two }}</strong>
       </template>
 
-      <no-ssr v-if="fixture.score_one === null && $store.state.user">
+      <no-ssr v-if="editable">
         <span><b> | </b> <span class="edit" @click="edit">{{ prediction ? 'Edit' : 'Add prediction' }}</span></span>
       </no-ssr>
     </small>
@@ -57,6 +57,13 @@ export default {
 
     time () {
       return this.date.getHours() + ':' + ('0' + this.date.getMinutes()).slice(-2)
+    },
+
+    editable () {
+      if (!this.$store.state.user) return false
+      if (this.fixture.score_one !== null) return false
+      if (Date.parse(new Date(this.fixture.date)) - Date.parse(new Date()) > 0) return false
+      return true
     }
   },
 

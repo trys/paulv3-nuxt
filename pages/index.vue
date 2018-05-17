@@ -131,8 +131,13 @@ b:nth-child(2n) {
   width: 130px;
 }
 
-.home__nav .button + .button {
+.home__nav .button + .button,
+.home__nav .button + div .button {
   margin-left: 10px;
+}
+
+.home__nav .button + div {
+  display: inline-block;
 }
 
 .home__content {

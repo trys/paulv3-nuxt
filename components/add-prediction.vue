@@ -113,7 +113,7 @@ export default {
 
 .center-page {
   position: relative;
-  z-index: 10;
+  z-index: 100;
   pointer-events: none;
   color: #43555C;
 }
