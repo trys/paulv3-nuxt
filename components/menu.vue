@@ -30,6 +30,7 @@ export default {
 
 <style scoped>
   .navicon {
+    -webkit-tap-highlight-color: transparent;
     height: 16px;
     width: 25px;
     background: url('data:image/svg+xml;charset=utf-8;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iMTYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBmaWxsPSIjRjdBMzgxIiBkPSJNMjUgMGgyNXYySDI1ek0yNSA3aDI1djJIMjV6TTI1IDE0aDI1djJIMjV6Ii8+PHBhdGggZmlsbD0iI0ZGRkZGRiIgZD0iTTAgMGgyNXYySDB6TTAgN2gyNXYySDB6TTAgMTRoMjV2MkgweiIvPjwvZz48L3N2Zz4=') 0 0 no-repeat;
