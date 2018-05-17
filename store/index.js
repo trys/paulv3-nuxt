@@ -122,7 +122,7 @@ const createStore = () => {
       },
 
       async build () {
-        await axios.post('https://api.netlify.com/build_hooks/5afd7635b3127423d9ed00ee')
+        await fetch('https://api.netlify.com/build_hooks/5afd7635b3127423d9ed00ee', { method: 'POST'})
       }
     },
 
