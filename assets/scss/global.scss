@@ -25,6 +25,10 @@ body {
   background-color: #F56969;
   min-height: 100vh;
   background-repeat: no-repeat;
+
+  @media (max-width: 45em) {
+    background-size: 50%;
+  }
 }
 
 .layout--fixtures,
@@ -46,6 +50,11 @@ body {
 
 .layout--groups-id {
   background-image: var(--blob_one), var(--blob_two);
+  background-position: 90% 10%, 10% 90%;
+}
+
+.layout--teams-id {
+  background-image: var(--blob_two), var(--blob_one);
   background-position: 90% 10%, 10% 90%;
 }
 
