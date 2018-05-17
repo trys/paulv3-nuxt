@@ -42,6 +42,7 @@
   color: inherit;
   width: 100%;
   pointer-events: all;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.4);
 }
 
 .center-page__container > header {

@@ -2,12 +2,19 @@
   <div class="home">
     <figure class="home__header">
       <paul-logo />
+      <p>Welcome to <strong>Paul the Octopus</strong> - the prediction game created in homage to the clever little critter that became world famous for his footballing foresight.</p>
+      <p>Sign up and put your powers of prophecy to the test throughout this summer's World Cup against literally dozens of other users.</p>
       <b style="left: 70%; top: 20%"></b>
       <b style="left: 20%; top: 40%"></b>
       <b style="left: 35%; top: 60%"></b>
       <b style="left: 10%; top: 80%"></b>
       <b style="left: 80%; top: 70%"></b>
       <b style="left: 60%; top: 10%"></b>
+      <b style="left: 25%; top: 15%" class="secondary"></b>
+      <b style="left: 22.5%; top: 65%" class="secondary"></b>
+      <b style="left: 10%; top: 10%" class="secondary"></b>
+      <b style="left: 90%; top: 30%" class="secondary"></b>
+      <b style="left: 70%; top: 45%" class="secondary"></b>
     </figure>
     <main class="home__main">
       <nav class="home__nav">
@@ -106,6 +113,26 @@ b {
   border-radius: 100%;
   border: 2px solid #F7A381;
   z-index: 1;
+}
+
+.secondary {
+  opacity: 0;
+}
+
+@media screen and (min-width: 40em) {
+  .secondary {
+    opacity: 1;
+  }
+}
+
+p {
+  max-width: 500px;
+  text-align: center;
+  margin: 0 auto 30px;
+  padding: 0 15px;
+  position: relative;
+  z-index: 2;
+  text-shadow: -1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 b:nth-child(2n) {

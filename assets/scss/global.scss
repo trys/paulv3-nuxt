@@ -11,10 +11,20 @@ body {
   font: 16px /1.4 'Avenir';
 }
 
+:root {
+  --blob_one: url('../images/blob_1.svg');
+  --blob_two: url('../images/blob_2.svg');
+  --blob_three: url('../images/blob_3.svg');
+  --blob_four: url('../images/blob_4.svg');
+  --blob_five: url('../images/blob_5.svg');
+  --blob_six: url('../images/blob_6.svg');
+}
+
 .layout {
   transition: 500ms 150ms background-color;
   background-color: #F56969;
   min-height: 100vh;
+  background-repeat: no-repeat;
 }
 
 .layout--fixtures,
@@ -29,8 +39,40 @@ body {
   background-color: #786fa6;
 }
 
+.layout--groups {
+  background-image: var(--blob_three), var(--blob_four), var(--blob_two), var(--blob_one);
+  background-position: 95% 5%, 10% 90%, 80% 60%, -5% 30%;
+}
+
+.layout--groups-id {
+  background-image: var(--blob_one), var(--blob_two);
+  background-position: 90% 10%, 10% 90%;
+}
+
+.layout--fixtures {
+  background-image: var(--blob_five), var(--blob_six), var(--blob_three), var(--blob_four), var(--blob_one), var(--blob_two);
+  background-position: 95% 5%, 10% 90%, 80% 40%, -5% 20%, 20% 50%, -5% 70%;
+}
+
+.layout--fixtures-id {
+  background-image: var(--blob_six), var(--blob_three);
+  background-position: 90% 10%, 10% 90%;
+}
+
 .layout--table {
   background-color: #778beb;
+  background-image: var(--blob_two), var(--blob_five);
+  background-position: 90% 10%, 10% 90%;
+}
+
+.layout--challenges {
+  background-image: var(--blob_four), var(--blob_three);
+  background-position: 90% 10%, 10% 90%;
+}
+
+.layout--index {
+  background-image: var(--blob_four), var(--blob_three);
+  background-position: 90% 10%, 40% 80%;
 }
 
 h1 {
