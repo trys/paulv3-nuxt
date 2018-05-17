@@ -21,6 +21,7 @@ export default {
   methods: {
     login () {
       window.location.href = this.$store.state.auth.loginExternalUrl(this.provider)
+      this.$emit('click')
     }
   }
 }
