@@ -25,7 +25,7 @@
             v-for="fixture in today"
             :key="fixture.id"
             :fixture="fixture"
-          ></fixture-preview>
+          />
         </div>
         <div v-else>
           <h5>There's an empty schedule, check back tomorrow</h5>
@@ -61,10 +61,11 @@ export default {
     },
 
     today () {
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
+      let td = new Date()
+      td.setMinutes(td.getMinutes() - td.getTimezoneOffset())
+      const today = td.toISOString().slice(0,10)
       return this.fixtures.filter(fixture => {
-        return today == new Date(fixture.date).setHours(0, 0, 0, 0)
+        return today == fixture.date.substring(0, 10)
       })
     }
   }
@@ -141,6 +142,5 @@ b:nth-child(2n) {
   background: #f5c9c9;
   height: 4px;
 }
-
 
 </style>

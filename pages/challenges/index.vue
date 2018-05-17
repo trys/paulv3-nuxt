@@ -11,23 +11,24 @@
               v-for="challenge in challenges"
               :key="challenge.id"
             >
-              {{ challenge.question }}
-              <form @submit.prevent="saveAnswer($event.target.answer.value, challenge.id)">
-                <team-picker
-                  v-if="challenge.type === 'teams'"
-                  :teams="teams"
-                  name="answer"
-                />
-                <input
-                  v-else
-                  type="number"
-                  max="999"
-                  min="0"
-                  step="1"
-                  name="answer"
-                  required
-                />
-                <button type="submit">Save answer</button>
+              <form method="POST" @submit.prevent="saveAnswer($event.target.answer.value, challenge.id)">
+                <label>{{ challenge.question }}<br>
+                  <team-picker
+                    v-if="challenge.type === 'teams'"
+                    :teams="teams"
+                    name="answer"
+                  />
+                  <input
+                    v-else
+                    type="number"
+                    max="999"
+                    min="0"
+                    step="1"
+                    name="answer"
+                    required
+                  />
+                </label>
+                <button class="button button--left" type="submit">Save</button>
               </form>
             </li>
           </ul>
@@ -107,3 +108,35 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+form {
+  display: grid;
+  grid-template-columns: 1fr 90px;
+  grid-gap: 20px;
+  align-items: end;
+
+  label,
+  input {
+    margin: 0;
+  }
+
+  .button {
+    margin-bottom: 5px;
+  }
+}
+
+ul + div > ul,
+li + li {
+  margin-top: 40px;
+}
+
+h4,
+p {
+  margin: 0;
+}
+
+.form-style {
+  margin-bottom: 30px;
+}
+</style>
