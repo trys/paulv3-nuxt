@@ -2,6 +2,7 @@
   <div class="page">
     <header class="page-header">
       <h1>Challenges</h1>
+      <template v-if="challenges.length"><p>Choose carefully, your answers are final!</p><br></template>
     </header>
     <div class="page-wrapper page-wrapper--padded form-style">
       <no-ssr>
