@@ -29,8 +29,15 @@ export default {
     }
   },
 
-  head: {
-    title: 'Fixtures'
+  head () {
+    return {
+      title: 'Fixtures',
+      meta: [
+        { property: 'og:url', content: `https://paultheoctop.us${this.$route.path}` },
+        { property: 'og:title', content: 'Fixtures | Paul the Octopus' },
+        { name: 'twitter:title', content: 'Fixtures | Paul the Octopus' }
+      ]
+    }
   },
 
   components: {

@@ -26,8 +26,15 @@ export default {
     }
   },
 
-  head: {
-    title: 'Teams'
+  head () {
+    return {
+      title: 'Teams',
+      meta: [
+        { property: 'og:url', content: `https://paultheoctop.us${this.$route.path}` },
+        { property: 'og:title', content: 'Teams | Paul the Octopus' },
+        { name: 'twitter:title', content: 'Teams | Paul the Octopus' }
+      ]
+    }
   },
 
   components: {

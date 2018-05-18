@@ -57,8 +57,15 @@ export default {
     }
   },
 
-  head: {
-    title: 'Home'
+  head () {
+    return {
+      title: 'Home',
+      meta: [
+        { property: 'og:url', content: `https://paultheoctop.us${this.$route.path}` },
+        { property: 'og:title', content: 'Home | Paul the Octopus' },
+        { name: 'twitter:title', content: 'Home | Paul the Octopus' }
+      ]
+    }
   },
 
   components: {

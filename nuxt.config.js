@@ -9,11 +9,23 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' },
+      { hid: 'description', name: 'description', content: 'Welcome to Paul the Octopus - the prediction game created in homage to the clever little critter that became world famous for his footballing foresight.' },
+      { property: 'og:description', content: 'Welcome to Paul the Octopus - the prediction game created in homage to the clever little critter that became world famous for his footballing foresight.' },
+      { name: 'twitter:description', content: 'Welcome to Paul the Octopus - the prediction game created in homage to the clever little critter that became world famous for his footballing foresight.' },
       { name: 'apple-mobile-web-app-title', content: 'Paul the Octopus' },
       { name: 'application-name', content: 'Paul the Octopus' },
       { name: 'msapplication-TileColor', content: '#da532c' },
-      { name: 'theme-color', content: '#ed645f' }
+      { name: 'theme-color', content: '#ed645f' },
+      { property: 'og:site_name', content: 'Paul the Octopus' },
+      { property: 'og:locale', content: 'en_GB' },
+      { property: 'article:publisher', content: 'https://www.facebook.com/tomangoUK' },
+      { name: 'twitter:site', content: '@tomangoUK' },
+      { name: 'twitter:creator', content: '@tomangoUK' },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:image:alt', content: 'Paul the Octopus' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { property: 'og:image', content: 'https://paultheoctop.us/og.jpg' },
+      { name: 'twitter:image', content: 'https://paultheoctop.us/og.jpg' }
     ],
     link: [
       { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
@@ -21,6 +33,10 @@ module.exports = {
       { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
       { rel: 'manifest', href: '/manifest.json' },
       { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#5bbad5' }
+    ],
+    script: [
+      { type: 'application/ld+json', innerHTML: '{"@context": "http:\/\/schema.org","@type":"WebSite","@id":"#website","url":"https:\/\/paultheoctop.us","name":"Paul the Octopus"}' },
+      { type: 'application/ld+json', innerHTML: '{"@context": "http:\/\/schema.org","@type":"Organization","url":"https:\/\/paultheoctop.us","@id":"#organization","name":"Paul the Octopus","logo":"https://paultheoctop.us/og.jpg"}' }
     ]
   },
 

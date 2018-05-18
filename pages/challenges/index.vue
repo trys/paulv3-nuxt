@@ -99,9 +99,14 @@ export default {
     adminOnly
   },
 
-  head() {
+  head () {
     return {
-      title: 'Challenges'
+      title: 'Challenges',
+      meta: [
+        { property: 'og:url', content: `https://paultheoctop.us${this.$route.path}` },
+        { property: 'og:title', content: 'Challenges | Paul the Octopus' },
+        { name: 'twitter:title', content: 'Challenges | Paul the Octopus' }
+      ]
     }
   },
 

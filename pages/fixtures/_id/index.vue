@@ -69,9 +69,15 @@ export default {
     return callback(null, { fixture })
   },
 
-  head() {
+  head () {
+    const title = `${this.fixture.team_one.name} vs. ${this.fixture.team_two.name}`
     return {
-      title: `${this.fixture.team_one.name} vs. ${this.fixture.team_two.name}`
+      title,
+      meta: [
+        { property: 'og:url', content: `https://paultheoctop.us${this.$route.path}` },
+        { property: 'og:title', content: `${title} | Paul the Octopus` },
+        { name: 'twitter:title', content: `${title} | Paul the Octopus` }
+      ]
     }
   },
 
