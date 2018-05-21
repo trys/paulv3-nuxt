@@ -11,7 +11,7 @@ const instance = axios.create({ baseURL })
 
 if (process.browser && process.static) {
   instance.interceptors.request.use((config) => {
-    if (config.method === 'post' || config.method === 'put') {
+    if (config.method === 'post' || config.method === 'put' || config.url.includes('users') ) {
       config.url = 'https://api.paultheoctop.us' + config.url.replace('/data', '')
       return config
     }

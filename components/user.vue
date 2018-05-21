@@ -31,6 +31,20 @@
         </table>
       </div>
 
+      <div v-if="user.challenges && user.challenges.length">
+        <ul>
+          <li
+            v-for="answer in user.challenges"
+            :key="answer.id"
+          >
+            <h4>{{ challenges.find(c => c.id === answer.challenge_id).question }} <admin-only>
+              <nuxt-link :to="{ name: 'challenges-id-edit', params: { id: answer.challenge_id } }">Edit</nuxt-link>
+            </admin-only></h4>
+            <p>{{ challenges.find(c => c.id === answer.challenge_id).type === 'teams' ? teams.find(t => t.id === answer.answer).name : answer.answer }}</p>
+          </li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </template>
@@ -40,19 +54,23 @@ export default {
   data () {
     return {
       user: null,
-      allFixtures: []
+      allFixtures: [],
+      challenges: [],
+      teams: []
     }
   },
 
   async mounted () {
     try {
-      const [user, fixtures] = await Promise.all([
+      const [user, fixtures, challenges, teams] = await Promise.all([
         this.$store.dispatch('api', {
           url: `/users/${Number(this.$route.params.id)}`,
           method: 'get',
           data: {}
         }),
-        this.$store.dispatch('getFixtures')
+        this.$store.dispatch('getFixtures'),
+        this.$store.dispatch('getChallenges'),
+        this.$store.dispatch('getTeams')
       ])
 
       this.user = user.data
