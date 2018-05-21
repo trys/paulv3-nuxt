@@ -41,6 +41,8 @@
           <h5>There's an empty schedule, check back tomorrow</h5>
         </div>
 
+        <small>Site by <a href="https://www.trysmudford.com">Trys Mudford</a> &amp; <a href="https://www.tomango.co.uk">Tomango</a></small>
+
       </div>
     </main>
   </div>
