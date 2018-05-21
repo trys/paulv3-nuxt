@@ -31,7 +31,7 @@
         </table>
       </div>
 
-      <div v-if="user.challenges && user.challenges.length">
+      <div v-if="user.challenges && user.challenges.length" class="table-wrapper">
         <ul>
           <li
             v-for="answer in user.challenges"
@@ -75,6 +75,8 @@ export default {
 
       this.user = user.data
       this.allFixtures = fixtures
+      this.challenges = challenges
+      this.teams = teams
     } catch(e) {}
   },
 
