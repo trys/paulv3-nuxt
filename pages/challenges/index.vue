@@ -82,6 +82,10 @@ export default {
       return this.$store.state.challengePredictions
     },
 
+    requested () {
+      return this.$store.state.predictions_requested
+    },
+
     allChallenges () {
       return this.$store.state.challenges
     },
@@ -89,6 +93,7 @@ export default {
     challenges () {
       return this.allChallenges.filter(challenge => {
         if (this.answers === false) return false
+        if (!this.requested) return false
         if (new Date(challenge.date).getTime() < new Date().getTime()) return false
         if (this.answers.find(a => a.challenge_id === challenge.id)) return false
         return true

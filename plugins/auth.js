@@ -43,6 +43,7 @@ export default async ({ store, route }) => {
               authorization: 'Bearer ' + token
             }
           })
+          store.commit('predictionsRequested')
           data.predictions.forEach(prediction => store.commit('addPrediction', prediction))
           store.commit('primeChallengePredictions')
           data.challenges.forEach(challenge => store.commit('addChallengePrediction', challenge))

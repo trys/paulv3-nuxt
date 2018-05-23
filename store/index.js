@@ -6,6 +6,7 @@ const createStore = () => {
     state: {
       predictions: [],
       challengePredictions: false,
+      predictions_requested: false,
       user: false,
       auth: null,
       teams: [],
@@ -150,6 +151,10 @@ const createStore = () => {
 
       primeChallengePredictions (state) {
         if (state.challengePredictions === false) state.challengePredictions = []
+      },
+
+      predictionsRequested(state) {
+        state.predictions_requested = true
       },
 
       addChallengePrediction(state, { challenge_id, answer }) {

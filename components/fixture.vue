@@ -61,6 +61,7 @@ export default {
 
     editable () {
       if (!this.$store.state.user) return false
+      if (!this.$store.state.predictions_requested) return false
       if (this.fixture.score_one !== null) return false
       if (new Date(this.fixture.date).getTime() < new Date().getTime()) return false
       return true
