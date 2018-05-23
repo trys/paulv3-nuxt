@@ -12,7 +12,7 @@
           <th class="secondary">GA</th>
           <th>GD</th>
           <th>P<span>oin</span>ts</th>
-          <th class="tertiary form"></th>
+          <th class="tertiary form">Form</th>
         </tr>  
       </thead>
       <tbody>
