@@ -17,6 +17,7 @@
                   <team-picker
                     v-if="challenge.type === 'teams'"
                     :teams="teams"
+                    :filter="challenge.id === 4 ? 'g' : ''"
                     name="answer"
                   />
                   <input
