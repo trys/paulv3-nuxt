@@ -13,7 +13,7 @@
               :key="challenge.id"
             >
               <form method="POST" @submit.prevent="saveAnswer($event.target.answer.value, challenge.id)">
-                <label>{{ challenge.question }}<br>
+                <label>{{ challenge.question }} <small>({{ challenge.points }}pt{{ challenge.points === 1 ? '' : 's' }})</small><br>
                   <team-picker
                     v-if="challenge.type === 'teams'"
                     :teams="teams"
@@ -40,7 +40,7 @@
                 v-for="answer in answers"
                 :key="answer.id"
               >
-                <h4>{{ allChallenges.find(c => c.id === answer.challenge_id).question }} <admin-only>
+                <h4>{{ allChallenges.find(c => c.id === answer.challenge_id).question }} <small>({{ allChallenges.find(c => c.id === answer.challenge_id).points }}pt{{ allChallenges.find(c => c.id === answer.challenge_id).points === 1 ? '' : 's' }})</small> <admin-only>
                   <nuxt-link :to="{ name: 'challenges-id-edit', params: { id: answer.challenge_id } }">Edit</nuxt-link>
                 </admin-only></h4>
                 <p>{{ allChallenges.find(c => c.id === answer.challenge_id).type === 'teams' ? teams.find(t => t.id === answer.answer).name : answer.answer }}</p>
