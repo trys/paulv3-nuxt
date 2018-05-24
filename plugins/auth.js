@@ -51,6 +51,8 @@ export default async ({ store, route }) => {
       }).catch(() => {
         store.commit('addUser', false)
       });
+    } else {
+      store.commit('addUser', false)
     }
   }, 100)
 }
