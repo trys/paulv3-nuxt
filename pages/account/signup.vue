@@ -7,7 +7,7 @@
       <br>
       <h1>Sign up</h1>
     </header>
-    <form method="POST" action="/account/signup/" @submit.prevent="signup">
+    <form method="POST" action="/account/signup/" @submit.prevent="signup" autocomplete="off">
       <h3 v-if="error">{{ error }}</h3>
       <label>Username: <br><input type="text" name="name" required></label><br>
       <label>Email: <br><input type="email" name="email" required></label><br>
