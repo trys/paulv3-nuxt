@@ -34,9 +34,9 @@ export default async ({ store, route }) => {
 
   setTimeout(function() {
     const user = store.state.auth.currentUser()
-    store.commit('addUser', user)
     if (user) {
       user.jwt().then(async (token) => {
+        store.commit('addUser', user)
         try {
           const { data } = await axios.get('predictions', {
             headers: {
