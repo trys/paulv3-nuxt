@@ -49,10 +49,10 @@ export default async ({ store, route }) => {
           data.challenges.forEach(challenge => store.commit('addChallengePrediction', challenge))
         } catch(e) {}
       }).catch(() => {
-        store.commit('addUser', false)
+        store.commit('addUser', null)
       });
     } else {
-      store.commit('addUser', false)
+      store.commit('addUser', null)
     }
   }, 100)
 }
