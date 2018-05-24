@@ -48,7 +48,9 @@ export default async ({ store, route }) => {
           store.commit('primeChallengePredictions')
           data.challenges.forEach(challenge => store.commit('addChallengePrediction', challenge))
         } catch(e) {}
-      }).catch(console.error);
+      }).catch(() => {
+        store.commit('addUser', false)
+      });
     }
-  }, 1)
+  }, 100)
 }
