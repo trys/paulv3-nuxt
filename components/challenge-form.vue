@@ -3,7 +3,7 @@
     <form @submit.prevent="$emit('submit', $event)" class="form-style">
       <div>
         <label for="question">Question</label>
-        <input type="text" name="question" :value="challenge.question || ''" id="question" required />
+        <input class="input-text" type="text" name="question" :value="challenge.question || ''" id="question" required />
       </div>
 
       <div>

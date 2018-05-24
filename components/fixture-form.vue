@@ -3,7 +3,7 @@
     <form @submit.prevent="$emit('submit', $event)" class="form-style">
       <div>
         <label for="name">Name</label>
-        <input type="text" name="name" :value="fixture.name || ''" id="name" required />
+        <input class="input-text" type="text" name="name" :value="fixture.name || ''" id="name" required />
       </div>
 
       <div>
@@ -45,7 +45,7 @@
 
         <div>
           <label for="final_score">Final Score</label>
-          <input type="text" name="final_score" :value="final_score" id="final_score" />
+          <input class="input-text" type="text" name="final_score" :value="final_score" id="final_score" />
         </div>
       </template>
 
