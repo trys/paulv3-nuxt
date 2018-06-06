@@ -12,6 +12,12 @@
       <label>Email: <br><input type="email" name="email" required></label><br>
       <label>Password: <br><input type="password" name="password" required></label><br>
       <button class="button" type="submit">Login</button>
+      <div class="center">
+        <small>
+          <br>
+          <nuxt-link to="/account/reset/">Forgotten your password?</nuxt-link>
+        </small>
+      </div>
     </form>
   </center-page>
 </template>
