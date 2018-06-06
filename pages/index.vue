@@ -128,12 +128,6 @@ b {
   opacity: 0;
 }
 
-@media screen and (min-width: 40em) {
-  .secondary {
-    opacity: 1;
-  }
-}
-
 p {
   max-width: 500px;
   text-align: center;
@@ -142,6 +136,20 @@ p {
   position: relative;
   z-index: 2;
   text-shadow: -1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (min-width: 40em) {
+  .secondary {
+    opacity: 1;
+  }
+
+  .home__header {
+    font-size: 1.25em;
+  }
+
+  .home__header p {
+    max-width: 700px;
+  }
 }
 
 b:nth-child(2n) {
