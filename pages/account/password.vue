@@ -35,10 +35,10 @@ export default {
     if (this.$route.hash && this.$route.hash.indexOf('#recovery_token') === 0) {
       this.token = this.$route.hash.replace('#recovery_token=', '')
       this.$store.state.auth
-        .recover(this.token)
-        .then(response =>
+        .recover(this.token, true)
+        .then(response => {
           this.$router.push('/account/set-password')
-        )
+        })
         .catch(error => {
           this.error = error.json.msg
         });
