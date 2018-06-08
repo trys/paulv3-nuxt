@@ -34,16 +34,12 @@ export default {
   mounted () {
     if (this.$route.hash && this.$route.hash.indexOf('#recovery_token') === 0) {
       this.token = this.$route.hash.replace('#recovery_token=', '')
-      console.log(this.token)
       this.$store.state.auth
         .recover(this.token, true)
         .then(response => {
-          console.log(response)
           const user = this.$store.state.auth.currentUser()
-          console.log(user)
           if (user) {
             user.jwt().then(() => {
-              console.log(123)
               this.$store.commit('addUser', user)
               setTimeout(() => {
                 this.$router.push('/account/set-password')
