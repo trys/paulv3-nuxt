@@ -27,6 +27,12 @@ body {
 	font: 400 16px/1.4 'Avenir LT', 'Avenir', -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 
+html.modal-open,
+html.modal-open body {
+  -webkit-overflow-scrolling: touch !important;
+	overflow: auto !important;
+}
+
 :root {
   --blob_one: url('../images/blob_1.svg');
   --blob_two: url('../images/blob_2.svg');

@@ -66,6 +66,8 @@ export default {
 
   computed: {
     active () {
+
+      document && document.documentElement.classList[this.$store.state.editing ? 'add' : 'remove']('modal-open')
       return this.$store.state.editing
     },
 
