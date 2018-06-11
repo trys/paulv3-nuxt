@@ -21,6 +21,7 @@
                   max="99"
                   step="1"
                   name="score_one"
+                  pattern="[0-9]*"
                   required
                 >
               </div>
@@ -35,6 +36,7 @@
                   max="99"
                   step="1"
                   name="score_two"
+                  pattern="[0-9]*"
                   required
                 >
               </div>
