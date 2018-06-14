@@ -61,6 +61,9 @@ export default {
       if (store.state.fixtures.length) {
         const f = store.state.fixtures.find(f => f.id === Number(params.id))
         if (f.score_one === null) fixture = f
+        if (fixture && new Date(fixture.date).getTime() < new Date().getTime()) {
+          fixture = await store.dispatch('getFixture', Number(params.id))
+        }
       }
       fixture = fixture || await store.dispatch('getFixture', Number(params.id))
     }
@@ -91,10 +94,12 @@ export default {
     },
 
     orderedPredictions () {
-      const predictions = this.fixture.predictions.map(p => {
+      const predictions = this.fixture.predictions || []
+      predictions.map(p => {
         p.username = p.username.replace('&#x2F;', "'")
         return p
-      }) || []
+      })
+
       if (this.fixture.score_one === null) {
         predictions.sort((a, b) => a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1)
         return predictions
