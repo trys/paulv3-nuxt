@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import Thyme from '@trys/thyme'
 import paulLogo from '@/components/logo'
 import fixturePreview from '@/components/fixture'
 import adminOnly from '@/components/admin-only'
@@ -82,12 +83,8 @@ export default {
     },
 
     today () {
-      let td = new Date()
-      td.setMinutes(td.getMinutes() - td.getTimezoneOffset())
-      const today = td.toISOString().slice(0,10)
-      return this.fixtures.filter(fixture => {
-        return today == fixture.date.substring(0, 10)
-      })
+      const today = new Thyme()
+      return this.fixtures.filter(fixture => today.equals(new Thyme(fixture.date)))
     }
   }
 }
