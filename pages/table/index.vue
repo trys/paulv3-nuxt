@@ -16,11 +16,15 @@ import leagueTable from '~/components/league-table'
 export default {
   async asyncData() {
     const { data } = await axios.get('/table')
-    return {
-      results: data.data.map(r => {
+    if (data && data.data && data.data.length) {
+      data.data.map(r => {
         r.username = r.username.replace('&#x2F;', "'")
         return r
-      }) || []
+      })
+    }
+
+    return {
+      results: data.data || []
     }
   },
 
