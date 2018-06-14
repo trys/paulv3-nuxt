@@ -17,7 +17,10 @@ export default {
   async asyncData() {
     const { data } = await axios.get('/table')
     return {
-      results: data.data || []
+      results: data.data.map(r => {
+        r.username = r.username.replace('&#x2F;', "'")
+        return r
+      }) || []
     }
   },
 

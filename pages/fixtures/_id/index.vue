@@ -91,9 +91,12 @@ export default {
     },
 
     orderedPredictions () {
-      const predictions = this.fixture.predictions || []
+      const predictions = this.fixture.predictions.map(p => {
+        p.username = p.username.replace('&#x2F;', "'")
+        return p
+      }) || []
       if (this.fixture.score_one === null) {
-        predictions.sort((a, b) => a.username > b.username ? 1 : -1)
+        predictions.sort((a, b) => a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1)
         return predictions
       }
 
@@ -112,7 +115,7 @@ export default {
         const points = b.points - a.points;
         if (points !== 0) return points;
 
-        return a.username > b.username ? 1 : -1;
+        return a.username.toLowerCase() > b.username.toLowerCase() ? 1 : -1;
       })
 
       return predictions

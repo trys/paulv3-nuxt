@@ -74,6 +74,7 @@ export default {
       ])
 
       this.user = user.data
+      this.user.username = this.user.username.replace('&#x2F;', "'")
       this.allFixtures = fixtures
       this.challenges = challenges
       this.teams = teams
