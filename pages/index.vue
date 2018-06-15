@@ -87,7 +87,7 @@ export default {
 
     today () {
       const today = new Thyme()
-      return this.fixtures.filter(fixture => today.equals(new Thyme(fixture.date)))
+      return this.fixtures.filter(fixture => today.equals(new Thyme(fixture.date))).sort((a, b) => a.date > b.date)
     }
   }
 }
