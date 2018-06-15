@@ -113,6 +113,8 @@ export default {
           p.points = 3
         } else if (result === calculate_result(p.score_one, p.score_two)) {
           p.points = 1
+        } else {
+          p.points = 0
         }
       })
 
