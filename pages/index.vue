@@ -28,19 +28,20 @@
         </template>
       </nav>
       <div class="home__content">
+        <h2>Today's fixtures</h2>
         <no-ssr>
-          <div>
-            <h2>Today's fixtures</h2>
-            <div class="fixtures" v-if="today.length">
-              <fixture-preview
-                v-for="fixture in today"
-                :key="fixture.id"
-                :fixture="fixture"
-              />
-            </div>
-            <div v-else>
-              <h5>There's an empty schedule, check back tomorrow</h5>
-            </div>
+          <div class="fixtures" v-if="today.length">
+            <fixture-preview
+              v-for="fixture in today"
+              :key="fixture.id"
+              :fixture="fixture"
+            />
+          </div>
+          <div v-else>
+            <h5>There's an empty schedule, check back tomorrow</h5>
+          </div>
+          <div slot="placeholder">
+            <h5>Loading today's fixtures</h5>
           </div>
         </no-ssr>
 
