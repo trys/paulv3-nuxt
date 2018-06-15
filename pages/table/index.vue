@@ -21,6 +21,12 @@ export default {
         r.username = r.username.replace('&#x2F;', "'")
         return r
       })
+      
+      let points = 0
+      data.data.forEach(r => {
+        r.positionLabel = r.total === points ? '-' : r.position
+        points = r.total
+      })
     }
 
     return {

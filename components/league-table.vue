@@ -10,7 +10,7 @@
       </thead>
       <tbody>
         <tr v-for="result in results" :key="result.user_id">
-          <td class="position">{{ result.position }} <span :class="{
+          <td class="position">{{ result.positionLabel }} <span :class="{
             'shift': true,
             'shift-up': result.shift && result.shift > 0,
             'shift-down': result.shift && result.shift < 0,
