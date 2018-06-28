@@ -49,13 +49,15 @@ export default {
       if (!this.fixtures) return null
       const fixture_groups = this.fixtures.reduce((current, fixture) => {
         const date = new Date(fixture.date)
-        const key = `${date.getMonth()}${date.getDate()}`
+        const double = digit => digit <= 9 ? '0' + digit : digit
+        const key = `${date.getMonth()}${double(date.getDate())}`
         if (!current[key]) current[key] = []
         current[key].push(fixture)
         return current
       }, {})
 
       Object.keys(fixture_groups).forEach(key => {
+        console.log(key)
         fixture_groups[key].sort((a, b) => new Date(a.date) > new Date(b.date));
       })
 
