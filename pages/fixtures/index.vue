@@ -57,7 +57,6 @@ export default {
       }, {})
 
       Object.keys(fixture_groups).forEach(key => {
-        console.log(key)
         fixture_groups[key].sort((a, b) => new Date(a.date) > new Date(b.date));
       })
 

@@ -6,6 +6,7 @@
         <center-page v-if="active">
           <header>
             <h3 class="lines">Prediction</h3>
+            <small>(Score at full/extra time)</small>
             <h4>{{ active.team_one.name }} vs. {{ active.team_two.name }}</h4>
             <h3 v-if="error" class="error">{{ error }}</h3>
           </header>
