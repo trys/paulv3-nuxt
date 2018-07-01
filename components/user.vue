@@ -37,9 +37,7 @@
             v-for="answer in user.challenges"
             :key="answer.id"
           >
-            <h4>{{ challenges.find(c => c.id === answer.challenge_id).question }} <admin-only>
-              <nuxt-link :to="{ name: 'challenges-id-edit', params: { id: answer.challenge_id } }">Edit</nuxt-link>
-            </admin-only></h4>
+            <h4>{{ challenges.find(c => c.id === answer.challenge_id).question }} </h4>
             <p>{{ challenges.find(c => c.id === answer.challenge_id).type === 'teams' ? teams.find(t => t.id === answer.answer).name : answer.answer }}</p>
           </li>
         </ul>
@@ -72,6 +70,8 @@ export default {
         this.$store.dispatch('getChallenges'),
         this.$store.dispatch('getTeams')
       ])
+
+      fixtures.sort((a, b) => new Date(a.date) - new Date(b.date));
 
       this.user = user.data
       this.user.username = this.user.username.replace('&#x2F;', "'")
