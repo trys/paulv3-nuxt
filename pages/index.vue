@@ -2,8 +2,14 @@
   <div class="home">
     <figure class="home__header">
       <paul-logo />
-      <p>Welcome to <strong>Paul the Octopus</strong> - the prediction game created in homage to the clever little critter that became world famous for his footballing foresight.</p>
-      <p>Sign up and put your powers of prophecy to the test throughout this summer's World Cup against literally dozens of other users.</p>
+
+      <div class="final-table">
+        <h2>Scores on the doors!</h2>
+        <p>Congratulations to <strong>{{ player }}</strong> for topping the table with <strong>{{ points }} points</strong>!</p>
+        <p>Thanks for playing Paul the Octopus this year! We hope you've enjoyed putting your prediction knowledge to the test. See you in two years for Euro 2020!</p>
+        <league-table :results="results" />
+      </div>
+
       <b style="left: 70%; top: 20%"></b>
       <b style="left: 20%; top: 40%"></b>
       <b style="left: 35%; top: 60%"></b>
@@ -28,23 +34,7 @@
         </template>
       </nav>
       <div class="home__content">
-        <h2>Today's fixtures</h2>
-        <no-ssr>
-          <div class="fixtures" v-if="today.length">
-            <fixture-preview
-              v-for="fixture in today"
-              :key="fixture.id"
-              :fixture="fixture"
-            />
-          </div>
-          <div v-else>
-            <h5>There's an empty schedule, check back tomorrow</h5>
-          </div>
-          <div slot="placeholder">
-            <h5>Loading today's fixtures</h5>
-          </div>
-        </no-ssr>
-
+        <br>
         <small>Site by <a href="https://www.trysmudford.com">Trys Mudford</a> &amp; <a href="https://www.tomango.co.uk">Tomango</a></small>
 
       </div>
@@ -53,14 +43,29 @@
 </template>
 
 <script>
-import Thyme from '@trys/thyme'
+import axios from '~/plugins/axios'
 import paulLogo from '@/components/logo'
-import fixturePreview from '@/components/fixture'
 import adminOnly from '@/components/admin-only'
+import leagueTable from '~/components/league-table'
+
 export default {
-  async asyncData({ store }) {
+  async asyncData() {
+    const { data } = await axios.get('/table')
+    if (data && data.data && data.data.length) {
+      data.data.map(r => {
+        r.username = r.username.replace('&#x2F;', "'")
+        return r
+      })
+      
+      let points = 0
+      data.data.forEach(r => {
+        r.positionLabel = r.total === points ? '-' : r.position
+        points = r.total
+      })
+    }
+
     return {
-      fixtures: await store.dispatch('getFixtures')
+      results: data.data || []
     }
   },
 
@@ -77,8 +82,8 @@ export default {
 
   components: {
     paulLogo,
-    fixturePreview,
-    adminOnly
+    adminOnly,
+    leagueTable
   },
 
   computed: {
@@ -86,9 +91,21 @@ export default {
       return this.$store.state.user
     },
 
-    today () {
-      const today = new Thyme()
-      return this.fixtures.filter(fixture => today.equals(new Thyme(fixture.date))).sort((a, b) => a.date > b.date)
+    points () {
+      return this.results[0].total
+    },
+
+    player () {
+      const total = this.points
+      const winners = this.results.filter(r => r.total === total)
+      if (winners.length > 1) {
+        let players = ''
+        const last = winners.pop()
+        players = winners.map(w => w.username).join(', ')
+        return players + ' & ' + last.username
+      } else {
+        return winners[0].username
+      }
     }
   }
 }
@@ -105,9 +122,7 @@ export default {
 .home__header {
   position: relative;
   padding: 20px 0 10vh;
-  background: url('~/assets/images/wave.svg') bottom -4px left /100% 10vh no-repeat,
-  url('~/assets/images/left.svg') bottom left /auto 80% no-repeat,
-  url('~/assets/images/right.svg') bottom right /auto 40% no-repeat;
+  background: url('~/assets/images/left.svg') bottom left /auto 80% no-repeat;
   overflow: hidden;
   margin: 0;
   flex: 1;
@@ -129,14 +144,25 @@ b {
   opacity: 0;
 }
 
-p {
-  max-width: 500px;
-  text-align: center;
-  margin: 0 auto 30px;
-  padding: 0 15px;
+.final-table {
+  max-width: 650px;
+  margin: 0 auto;
+  width: 100%;
+  background: #FFF;
+  font-size: 16px;
   position: relative;
-  z-index: 2;
-  text-shadow: -1px 1px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+  color: #F56969;
+}
+
+.final-table h2 {
+  text-align: center;
+  margin: 20px 0 0;    
+}
+
+.final-table p {
+  padding: 0 20px;
 }
 
 @media screen and (min-width: 40em) {
@@ -169,6 +195,7 @@ b:nth-child(2n) {
   display: flex;
   justify-content: center;
   min-height: 40px;
+  padding-top: 20px;
 }
 
 .home__nav .button {
